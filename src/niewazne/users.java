@@ -1,4 +1,4 @@
-package sample;
+package niewazne;
 
 public class users {
    private int id ;
