@@ -140,6 +140,7 @@ public class MainController implements Initializable {
         String query = "DELETE FROM samochody WHERE id =" + this.tfId.getText() + "";
         this.executeQuery(query);
         this.showCars();
+        clearTextFields(null);
     }
 
     private void executeQuery(String query) {
@@ -155,12 +156,16 @@ public class MainController implements Initializable {
 
     @FXML
     private void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
-        samochody sam = table_cars.getSelectionModel().getSelectedItem();
-        tfId.setText("" + sam.getId());
-        tfMarka.setText("" + sam.getMarka());
-        tfModel.setText("" + sam.getModel());
-        tfNrRej.setText("" + sam.getNrRej());
-        cbSTan.setValue(sam.getStan());
+        try {
+            samochody sam = table_cars.getSelectionModel().getSelectedItem();
+            tfId.setText("" + sam.getId());
+            tfMarka.setText("" + sam.getMarka());
+            tfModel.setText("" + sam.getModel());
+            tfNrRej.setText("" + sam.getNrRej());
+            cbSTan.setValue(sam.getStan());
+        }
+        catch (Exception e) {
+        }
     }
 
     @FXML
@@ -171,7 +176,6 @@ public class MainController implements Initializable {
         tfNrRej.clear();
         cbSTan.getSelectionModel().select(-1);
     }
-
 
 
 

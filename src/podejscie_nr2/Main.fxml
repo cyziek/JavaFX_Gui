@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podejscie_nr2.MainController">
    <children>
-      <AnchorPane onMouseClicked="#clearTextFields" prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #282533;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #282533;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="btnInsert" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Dodaj" textAlignment="CENTER">
                <font>
