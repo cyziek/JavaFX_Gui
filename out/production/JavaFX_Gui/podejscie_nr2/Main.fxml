@@ -70,5 +70,6 @@
             <TableColumn fx:id="colStan" prefWidth="115.0" text="Stan" />
          </columns>
       </TableView>
+      <Button fx:id="btnGoToClients" layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onAction="#GoToClients" prefHeight="42.0" prefWidth="206.0" text="Go to KLIEICI" />
    </children>
 </AnchorPane>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podejscie_nr2.KlienciController">
+   <children>
+      <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #0d261a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btnInsert" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Dodaj" textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnUpdate" layoutX="24.0" layoutY="376.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: Orange;" text="Zmień">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnDelete" layoutX="24.0" layoutY="430.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: red;" text="Usuń">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="tfImie" layoutX="24.0" layoutY="58.0" prefHeight="30.0" prefWidth="180.0" promptText="Imie">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="tfNazwisko" layoutX="24.0" layoutY="103.0" prefHeight="30.0" prefWidth="180.0" promptText="Nazwisko">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="tfAdres" layoutX="24.0" layoutY="148.0" prefHeight="30.0" prefWidth="180.0" promptText="Adres">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="tfId" layoutX="24.0" layoutY="18.0" prefHeight="23.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </TextField>
+            <Button fx:id="btnClear" layoutX="160.0" layoutY="280.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="43.0" />
+            <TextField fx:id="tfNIP" layoutX="24.0" layoutY="194.0" prefHeight="30.0" prefWidth="180.0" promptText="NIP" />
+            <TextField fx:id="tfTel" layoutX="24.0" layoutY="240.0" prefHeight="30.0" prefWidth="180.0" promptText="Numer telefonu" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="table_cars" layoutX="228.0" layoutY="76.0" prefHeight="474.0" prefWidth="469.0" style="-fx-background-color: #e5ffe6;">
+         <columns>
+            <TableColumn fx:id="colIdKlienta" prefWidth="65.0" text="ID Klienta" />
+            <TableColumn fx:id="colImie" prefWidth="57.0" text="Imię" />
+            <TableColumn fx:id="colNazwisko" prefWidth="87.0" text="Nazwisko" />
+            <TableColumn fx:id="colAdres" prefWidth="106.0" text="Adres" />
+            <TableColumn fx:id="colNIP" prefWidth="75.0" text="NIP" />
+            <TableColumn fx:id="colTel" prefWidth="105.0" text="tel" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

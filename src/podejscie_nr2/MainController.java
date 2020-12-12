@@ -13,10 +13,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import javax.swing.text.html.ImageView;
 
@@ -177,6 +182,22 @@ public class MainController implements Initializable {
         cbSTan.getSelectionModel().select(-1);
     }
 
+    @FXML
+    private void GoToClients(ActionEvent event){
+    try {
+        Parent ClientsView = FXMLLoader.load(getClass().getResource("Klienci.fxml"));
+        Scene ClientsScene = new Scene(ClientsView);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(ClientsScene);
+        window.show();
+    }
+    catch (Exception e){
+        System.out.println(e);
+    }
+
+    }
 
 
 }
