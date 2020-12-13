@@ -56,12 +56,12 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <Button fx:id="btnClear" layoutX="160.0" layoutY="280.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="43.0" />
+            <Button fx:id="btnClear" layoutX="160.0" layoutY="280.0" onAction="#clearTextFields" prefHeight="30.0" prefWidth="43.0" />
             <TextField fx:id="tfNIP" layoutX="24.0" layoutY="194.0" prefHeight="30.0" prefWidth="180.0" promptText="NIP" />
             <TextField fx:id="tfTel" layoutX="24.0" layoutY="240.0" prefHeight="30.0" prefWidth="180.0" promptText="Numer telefonu" />
          </children>
       </AnchorPane>
-      <TableView fx:id="table_cars" layoutX="228.0" layoutY="76.0" prefHeight="474.0" prefWidth="469.0" style="-fx-background-color: #e5ffe6;">
+      <TableView fx:id="table_clients" layoutX="228.0" layoutY="76.0" onMouseClicked="#handleMouseAction" prefHeight="474.0" prefWidth="469.0" style="-fx-background-color: #e5ffe6;">
          <columns>
             <TableColumn fx:id="colIdKlienta" prefWidth="65.0" text="ID Klienta" />
             <TableColumn fx:id="colImie" prefWidth="57.0" text="Imię" />

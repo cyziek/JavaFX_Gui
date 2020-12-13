@@ -60,8 +60,8 @@ public class MainController implements Initializable {
     private Button btnClear;
 
 
-    public MainController() {
-    }
+   // public MainController() {
+   // }
 
 
     @FXML
