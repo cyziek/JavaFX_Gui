@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #0d261a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnInsert" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Dodaj" textAlignment="CENTER">
+            <Button fx:id="btnInsert" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Dodaj" textAlignment="CENTER">
                <font>
                   <Font size="19.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnUpdate" layoutX="24.0" layoutY="376.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: Orange;" text="Zmień">
+            <Button fx:id="btnUpdate" layoutX="24.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: Orange;" text="Zmień">
                <font>
                   <Font size="19.0" />
                </font>
@@ -28,7 +28,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnDelete" layoutX="24.0" layoutY="430.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: red;" text="Usuń">
+            <Button fx:id="btnDelete" layoutX="24.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: red;" text="Usuń">
                <font>
                   <Font size="19.0" />
                </font>
