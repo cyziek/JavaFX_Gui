@@ -71,5 +71,6 @@
             <TableColumn fx:id="colTel" prefWidth="105.0" text="tel" />
          </columns>
       </TableView>
+      <Button fx:id="btnFromClientsToCars" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToCars" prefHeight="42.0" prefWidth="153.0" text="Back to Samochody" />
    </children>
 </AnchorPane>

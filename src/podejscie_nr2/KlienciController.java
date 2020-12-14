@@ -201,4 +201,21 @@ public class KlienciController implements Initializable{
 
         }
     }
+
+    @FXML
+    private void fromClientsToCars(ActionEvent event){
+        try {
+           Parent CarsView = FXMLLoader.load(getClass().getResource("Main.fxml"));
+            Scene CarsScene = new Scene(CarsView);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(CarsScene);
+            window.show();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
 }
