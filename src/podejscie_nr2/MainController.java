@@ -131,6 +131,7 @@ public class MainController implements Initializable {
         String query = "INSERT INTO samochody VALUES (" + this.tfId.getText() + ",'" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
         this.executeQuery(query);
         this.showCars();
+        clearTextFields(null);
     }
 
     private void updateRecord() {
@@ -138,6 +139,7 @@ public class MainController implements Initializable {
 
         this.executeQuery(query);
         this.showCars();
+        clearTextFields(null);
     }
 
     private void deleteButton() {

@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -32,13 +33,16 @@ public class KlienciController implements Initializable{
 
 
     @FXML
-    private Button btnInsert;
+    private ImageView btnInsert;
 
     @FXML
-    private Button btnUpdate;
+    private ImageView btnUpdate;
 
     @FXML
-    private Button btnDelete;
+    private ImageView btnDelete;
+
+    @FXML
+    private ImageView btnClear;
 
     @FXML
     private TextField tfImie;
@@ -51,9 +55,6 @@ public class KlienciController implements Initializable{
 
     @FXML
     private TextField tfId;
-
-    @FXML
-    private Button btnClear;
 
     @FXML
     private TextField tfNIP;
@@ -84,7 +85,7 @@ public class KlienciController implements Initializable{
 
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(MouseEvent event) {
         if (event.getSource() == this.btnInsert) {
             this.insertRecord();
         } else if (event.getSource() == this.btnUpdate) {
@@ -159,7 +160,7 @@ public class KlienciController implements Initializable{
     }
 
     @FXML
-    private void clearTextFields(ActionEvent event){
+    private void clearTextFields(MouseEvent event){
         tfId.clear();
         tfImie.clear();
         tfNazwisko.clear();
@@ -173,6 +174,7 @@ public class KlienciController implements Initializable{
         String query = "INSERT INTO klienci VALUES (" + this.tfId.getText() + ",'" + this.tfImie.getText() + "','" + this.tfNazwisko.getText() + "','" + this.tfAdres.getText() + "', '" + this.tfNIP.getText() + "', '" + this.tfTel.getText() + "')";
         this.executeQuery(query);
         this.showClients();
+        clearTextFields(null);
     }
 
     private void updateRecord() {
@@ -180,6 +182,7 @@ public class KlienciController implements Initializable{
 
         this.executeQuery(query);
         this.showClients();
+        clearTextFields(null);
     }
 
     private void deleteButton() {
