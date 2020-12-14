@@ -20,10 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import javax.swing.text.html.ImageView;
 
 public class MainController implements Initializable {
     @FXML
@@ -51,13 +50,13 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<samochody, String> colStan;
     @FXML
-    private Button btnInsert;
+    private ImageView btnInsert;
     @FXML
-    private Button btnUpdate;
+    private ImageView btnUpdate;
     @FXML
-    private Button btnDelete;
+    private ImageView btnDelete;
     @FXML
-    private Button btnClear;
+    private ImageView btnClear;
 
 
    // public MainController() {
@@ -65,7 +64,7 @@ public class MainController implements Initializable {
 
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(MouseEvent event) {
         if (event.getSource() == this.btnInsert) {
             this.insertRecord();
         } else if (event.getSource() == this.btnUpdate) {
@@ -174,7 +173,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void clearTextFields(ActionEvent event){ //przycisk od czyszczenia
+    private void clearTextFields(MouseEvent event){ //przycisk od czyszczenia
         tfId.clear();
         tfMarka.clear();
         tfModel.clear();
@@ -189,7 +188,7 @@ public class MainController implements Initializable {
         Scene ClientsScene = new Scene(ClientsView);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+        window.setTitle("Wypożyczalnia - Klienci");
         window.setScene(ClientsScene);
         window.show();
     }

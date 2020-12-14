@@ -6,37 +6,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podejscie_nr2.MainController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #282533;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnInsert" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Dodaj" textAlignment="CENTER">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnUpdate" layoutX="24.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: Orange;" text="Zmień">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="btnDelete" layoutX="24.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: red;" text="Usuń">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <TextField fx:id="tfMarka" layoutX="24.0" layoutY="61.0" prefHeight="30.0" prefWidth="180.0" promptText="Marka">
                <cursor>
                   <Cursor fx:constant="TEXT" />
@@ -58,7 +35,26 @@
                </cursor>
             </TextField>
             <ComboBox fx:id="cbSTan" layoutX="24.0" layoutY="205.0" prefHeight="30.0" prefWidth="180.0" promptText="Stan" />
-            <Button fx:id="btnClear" layoutX="161.0" layoutY="245.0" mnemonicParsing="false" onAction="#clearTextFields" prefHeight="30.0" prefWidth="43.0" />
+            <ImageView fx:id="btnInsert2" fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="308.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/plus.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnUpdate2" fitHeight="53.0" fitWidth="53.0" layoutX="88.0" layoutY="308.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/update.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnDelete2" fitHeight="53.0" fitWidth="56.0" layoutX="151.0" layoutY="308.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/delete.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" layoutX="151.0" layoutY="235.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/clear.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <TableView fx:id="table_cars" layoutX="228.0" layoutY="76.0" onMouseClicked="#handleMouseAction" prefHeight="474.0" prefWidth="469.0" style="-fx-background-color: #e6eeff;">

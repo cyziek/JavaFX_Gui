@@ -209,7 +209,7 @@ public class KlienciController implements Initializable{
             Scene CarsScene = new Scene(CarsView);
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+                window.setTitle("Wypożyczalnia - Samochody");
             window.setScene(CarsScene);
             window.show();
         }
