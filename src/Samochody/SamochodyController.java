@@ -1,14 +1,12 @@
-package podejscie_nr2;
+package Samochody;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import com.sun.prism.Image;
-import javafx.beans.Observable;
+import DatabaseConn.DBConn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class MainController implements Initializable {
+public class SamochodyController implements Initializable {
     @FXML
     private TextField tfId;
     @FXML
@@ -33,6 +31,7 @@ public class MainController implements Initializable {
     private TextField tfModel;
     @FXML
     private TextField tfNrRej;
+
 
     @FXML
     private ComboBox<String> cbSTan;
@@ -59,6 +58,7 @@ public class MainController implements Initializable {
     private ImageView btnClear;
 
 
+
    // public MainController() {
    // }
 
@@ -77,21 +77,14 @@ public class MainController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         this.showCars();
+        DBConn.getConnection();
     }
 
-    public Connection getConnection() {
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wypozyczalnia", "root", "");
-            return conn;
-        } catch (Exception var3) {
-            System.out.println("Error: " + var3.getMessage());
-            return null;
-        }
-    }
+
 
     public ObservableList<samochody> getCarsList() {
         ObservableList<samochody> samochodyList = FXCollections.observableArrayList();
-        Connection conn = this.getConnection();
+        Connection conn = DBConn.getConnection();
         String query = "SELECT * FROM samochody";
 
         try {
@@ -128,10 +121,15 @@ public class MainController implements Initializable {
     }
 
     private void insertRecord() {
-        String query = "INSERT INTO samochody VALUES (" + this.tfId.getText() + ",'" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
-        this.executeQuery(query);
-        this.showCars();
-        clearTextFields(null);
+        try {
+            String query = "INSERT INTO samochody VALUES (" + this.tfId.getText() + ",'" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
+            this.executeQuery(query);
+            this.showCars();
+            clearTextFields(null);
+        }
+        catch (Exception e){
+
+        }
     }
 
     private void updateRecord() {
@@ -150,7 +148,7 @@ public class MainController implements Initializable {
     }
 
     private void executeQuery(String query) {
-        Connection conn = this.getConnection();
+        Connection conn = DBConn.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -161,7 +159,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
+    public void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
         try {
             samochody sam = table_cars.getSelectionModel().getSelectedItem();
             tfId.setText("" + sam.getId());
@@ -169,6 +167,7 @@ public class MainController implements Initializable {
             tfModel.setText("" + sam.getModel());
             tfNrRej.setText("" + sam.getNrRej());
             cbSTan.setValue(sam.getStan());
+
         }
         catch (Exception e) {
         }
@@ -186,7 +185,7 @@ public class MainController implements Initializable {
     @FXML
     private void GoToClients(ActionEvent event){
     try {
-        Parent ClientsView = FXMLLoader.load(getClass().getResource("Klienci.fxml"));
+        Parent ClientsView = FXMLLoader.load(getClass().getResource("/Klienci/Klienci.fxml"));
         Scene ClientsScene = new Scene(ClientsView);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -200,5 +199,22 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    private void btnCarToRent(ActionEvent event){
+        try {
+            Parent RentView = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
+            Scene RentScene = new Scene(RentView);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setTitle("Wypożyczalnia - Klienci");
+            window.setScene(RentScene);
+            window.show();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
 
 }
+

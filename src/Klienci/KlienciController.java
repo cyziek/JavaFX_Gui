@@ -1,14 +1,12 @@
-package podejscie_nr2;
+package Klienci;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import com.sun.prism.Image;
-import javafx.beans.Observable;
+import DatabaseConn.DBConn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,9 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-
-
 
 
 public class KlienciController implements Initializable{
@@ -98,21 +93,12 @@ public class KlienciController implements Initializable{
 
     public void initialize(URL url, ResourceBundle rb) {
         this.showClients();
-    }
-
-    public Connection getConnection() {
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wypozyczalnia", "root", "");
-            return conn;
-        } catch (Exception var3) {
-            System.out.println("Error: " + var3.getMessage());
-            return null;
-        }
+        DBConn.getConnection();
     }
 
     public ObservableList<klienci> getClientsList() {
         ObservableList<klienci> klienciList = FXCollections.observableArrayList();
-        Connection conn = this.getConnection();
+        Connection conn = DBConn.getConnection();
         String query = "SELECT * FROM klienci";
 
         try {
@@ -193,7 +179,7 @@ public class KlienciController implements Initializable{
     }
 
     private void executeQuery(String query) {
-        Connection conn = this.getConnection();
+        Connection conn = DBConn.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -208,11 +194,12 @@ public class KlienciController implements Initializable{
     @FXML
     private void fromClientsToCars(ActionEvent event){
         try {
-           Parent CarsView = FXMLLoader.load(getClass().getResource("Main.fxml"));
+           Parent CarsView = FXMLLoader.load(getClass().getResource("/Samochody/Samochody.fxml"));
             Scene CarsScene = new Scene(CarsView);
 
+
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setTitle("Wypożyczalnia - Samochody");
+            window.setTitle("Wypożyczalnia - Samochody");
             window.setScene(CarsScene);
             window.show();
         }
@@ -221,4 +208,22 @@ public class KlienciController implements Initializable{
         }
 
     }
+
+    @FXML
+    private void fromClientsToRent(ActionEvent event){
+        try {
+            Parent RentView = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
+            Scene RentScene = new Scene(RentView);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setTitle("Wypożyczalnia - Wypożyczenia");
+            window.setScene(RentScene);
+            window.show();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podejscie_nr2.KlienciController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Klienci.KlienciController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #0d261a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -92,5 +92,6 @@
          </columns>
       </TableView>
       <Button fx:id="btnFromClientsToCars" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToCars" prefHeight="42.0" prefWidth="153.0" text="Back to Samochody" />
+      <Button fx:id="btnGoToRent" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToRent" prefHeight="42.0" prefWidth="137.0" text="Go to Wypożyczenia" />
    </children>
 </AnchorPane>

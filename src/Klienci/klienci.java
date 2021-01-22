@@ -1,4 +1,4 @@
-package podejscie_nr2;
+package Klienci;
 
 public class klienci {
 

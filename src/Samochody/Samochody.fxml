@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podejscie_nr2.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Samochody.SamochodyController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #282533;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox layoutX="4.0" prefHeight="381.0" prefWidth="206.0" spacing="20.0">
+            <VBox prefHeight="550.0" prefWidth="232.0" spacing="20.0">
                <children>
                   <TextField fx:id="tfId" prefHeight="30.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
                      <cursor>
@@ -56,7 +56,7 @@
                   </ImageView>
                </children>
                <padding>
-                  <Insets left="20.0" top="16.0" />
+                  <Insets left="20.0" right="20.0" top="50.0" />
                </padding>
             </VBox>
             <ImageView fx:id="btnInsert" fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="467.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
@@ -94,6 +94,8 @@
             <TableColumn fx:id="colStan" prefWidth="115.0" text="Stan" />
          </columns>
       </TableView>
-      <Button fx:id="btnGoToClients" layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onAction="#GoToClients" prefHeight="42.0" prefWidth="206.0" text="Go to KLIEICI" />
+      <Button fx:id="btnGoToClients" layoutX="247.0" layoutY="35.0" mnemonicParsing="false" onAction="#GoToClients" prefHeight="44.0" prefWidth="181.0" text="Go to KLIEICI" />
+      <Button fx:id="btnCarToRent" layoutX="489.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnCarToRent" prefHeight="44.0" prefWidth="154.0" text="Go to Wypożyczenia" />
+
    </children>
 </AnchorPane>

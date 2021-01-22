@@ -1,4 +1,4 @@
-package podejscie_nr2;
+package Samochody;
 
 public class samochody {
     private int id;
