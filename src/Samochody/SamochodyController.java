@@ -3,12 +3,16 @@ package Samochody;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import DatabaseConn.DBConn;
+import DatabaseConn.DBConnect;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -31,7 +36,8 @@ public class SamochodyController implements Initializable {
     private TextField tfModel;
     @FXML
     private TextField tfNrRej;
-
+    @FXML
+    private TextField searchBox;
 
     @FXML
     private ComboBox<String> cbSTan;
@@ -77,14 +83,14 @@ public class SamochodyController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         this.showCars();
-        DBConn.getConnection();
+        DBConnect.getConnection();
     }
 
 
 
     public ObservableList<samochody> getCarsList() {
         ObservableList<samochody> samochodyList = FXCollections.observableArrayList();
-        Connection conn = DBConn.getConnection();
+        Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM samochody";
 
         try {
@@ -122,7 +128,7 @@ public class SamochodyController implements Initializable {
 
     private void insertRecord() {
         try {
-            String query = "INSERT INTO samochody VALUES (" + this.tfId.getText() + ",'" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
+            String query = "INSERT INTO samochody (marka, model, nrRej, stan) VALUES ('" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
             this.executeQuery(query);
             this.showCars();
             clearTextFields(null);
@@ -148,7 +154,7 @@ public class SamochodyController implements Initializable {
     }
 
     private void executeQuery(String query) {
-        Connection conn = DBConn.getConnection();
+        Connection conn = DBConnect.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -214,6 +220,43 @@ public class SamochodyController implements Initializable {
             System.out.println(e);
         }
     }
+
+    @FXML
+    private void searchRecord(KeyEvent ke){
+
+        FilteredList<samochody> samochodyFilteredList = new FilteredList<>(getCarsList(),p-> true );
+        searchBox.textProperty().addListener((observableValue, oldvalue, newvalue) -> {
+            samochodyFilteredList.setPredicate(pers -> {
+
+                if(newvalue == null || newvalue.isEmpty()){
+                    return true;
+                }
+
+                String typedText = newvalue.toLowerCase();
+                if(pers.getMarka().toLowerCase().indexOf(typedText) != -1){
+                    return true;
+                }
+
+                if(pers.getModel().toLowerCase().indexOf(typedText) != -1){
+                    return true;
+                }
+
+                if(pers.getNrRej().toLowerCase().indexOf(typedText) != -1){
+                    return true;
+                }
+
+                if(pers.getStan().toLowerCase().indexOf(typedText) != -1){
+                    return true;
+                }
+
+                return false;
+            });
+            SortedList<samochody> sortedList = new SortedList<>(samochodyFilteredList);
+            sortedList.comparatorProperty().bind(table_cars.comparatorProperty());
+            table_cars.setItems(sortedList);
+        });
+    }
+
 
 
 }

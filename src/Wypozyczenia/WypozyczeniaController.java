@@ -1,13 +1,14 @@
 package Wypozyczenia;
 
 
-import DatabaseConn.DBConn;
+import DatabaseConn.DBConnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,9 @@ public class WypozyczeniaController {
     private ImageView btnDelete;
 
     @FXML
+    private ComboBox CB_Cars;
+
+    @FXML
     private TableView<?> table_clients;
 
     @FXML
@@ -55,7 +59,7 @@ public class WypozyczeniaController {
 
 
     public void initialize(URL url, ResourceBundle rb) {
-        DBConn.getConnection();
+        DBConnect.getConnection();
     }
 
 
@@ -90,5 +94,9 @@ public class WypozyczeniaController {
             System.out.println(e);
         }
     }
+
+
+
+
 
 }

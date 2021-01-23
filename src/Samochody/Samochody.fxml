@@ -18,17 +18,17 @@
          <children>
             <VBox prefHeight="550.0" prefWidth="232.0" spacing="20.0">
                <children>
-                  <TextField fx:id="tfId" prefHeight="30.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
+                  <TextField fx:id="tfId" disable="true" prefHeight="30.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </TextField>
-                  <TextField fx:id="tfModel" prefHeight="30.0" prefWidth="180.0" promptText="Model">
+                  <TextField fx:id="tfMarka" prefHeight="30.0" prefWidth="180.0" promptText="Marka">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </TextField>
-                  <TextField fx:id="tfMarka" prefHeight="30.0" prefWidth="180.0" promptText="Marka">
+                  <TextField fx:id="tfModel" prefHeight="30.0" prefWidth="180.0" promptText="Model">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
@@ -96,6 +96,7 @@
       </TableView>
       <Button fx:id="btnGoToClients" layoutX="247.0" layoutY="35.0" mnemonicParsing="false" onAction="#GoToClients" prefHeight="44.0" prefWidth="181.0" text="Go to KLIEICI" />
       <Button fx:id="btnCarToRent" layoutX="489.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnCarToRent" prefHeight="44.0" prefWidth="154.0" text="Go to Wypożyczenia" />
+      <TextField fx:id="searchBox" layoutX="247.0" layoutY="100.0" onKeyTyped="#searchRecord" promptText="Wyszukaj" />
 
    </children>
 </AnchorPane>

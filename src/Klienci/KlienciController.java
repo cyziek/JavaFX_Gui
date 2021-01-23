@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import DatabaseConn.DBConn;
+import DatabaseConn.DBConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,12 +93,12 @@ public class KlienciController implements Initializable{
 
     public void initialize(URL url, ResourceBundle rb) {
         this.showClients();
-        DBConn.getConnection();
+        DBConnect.getConnection();
     }
 
     public ObservableList<klienci> getClientsList() {
         ObservableList<klienci> klienciList = FXCollections.observableArrayList();
-        Connection conn = DBConn.getConnection();
+        Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM klienci";
 
         try {
@@ -179,7 +179,7 @@ public class KlienciController implements Initializable{
     }
 
     private void executeQuery(String query) {
-        Connection conn = DBConn.getConnection();
+        Connection conn = DBConnect.getConnection();
 
         try {
             Statement st = conn.createStatement();

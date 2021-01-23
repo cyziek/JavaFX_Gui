@@ -23,10 +23,10 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </TextField>
-                  <ComboBox editable="true" prefHeight="33.0" prefWidth="188.0" promptText="ID_Klienta" />
-                  <ComboBox editable="true" prefHeight="27.0" prefWidth="187.0" promptText="ID_Samochodu" />
-                  <DatePicker prefHeight="30.0" prefWidth="200.0" promptText="Data wypożyczenia" />
-                  <DatePicker prefHeight="30.0" prefWidth="200.0" promptText="Data zwrotu" />
+                  <ComboBox fx:id="CB_Cars" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
+                  <ComboBox fx:id="CB_Clients" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
+                  <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data wypożyczenia" />
+                  <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data zwrotu" />
                   <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/clear.png" />
