@@ -11,17 +11,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Klienci.KlienciController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Klienci.KlienciController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #0d261a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="550.0" prefWidth="228.0" spacing="20.0">
                <children>
-                  <TextField fx:id="tfId" prefHeight="23.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </TextField>
                   <TextField fx:id="tfImie" prefHeight="30.0" prefWidth="180.0" promptText="Imie">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
@@ -81,17 +76,18 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="table_clients" layoutX="228.0" layoutY="142.0" onMouseClicked="#handleMouseAction" prefHeight="408.0" prefWidth="469.0" style="-fx-background-color: #e5ffe6;">
+      <TableView fx:id="table_clients" layoutX="228.0" layoutY="142.0" onMouseClicked="#handleMouseAction" prefHeight="508.0" prefWidth="672.0" style="-fx-background-color: #e5ffe6;">
          <columns>
-            <TableColumn fx:id="colIdKlienta" prefWidth="65.0" text="ID Klienta" />
-            <TableColumn fx:id="colImie" prefWidth="57.0" text="Imię" />
-            <TableColumn fx:id="colNazwisko" prefWidth="87.0" text="Nazwisko" />
-            <TableColumn fx:id="colAdres" prefWidth="106.0" text="Adres" />
-            <TableColumn fx:id="colNIP" prefWidth="75.0" text="NIP" />
-            <TableColumn fx:id="colTel" prefWidth="105.0" text="tel" />
+            <TableColumn fx:id="colIdKlienta" prefWidth="65.0" text="ID Klienta" visible="false" />
+            <TableColumn fx:id="colImie" prefWidth="75.0" text="Imię" />
+            <TableColumn fx:id="colNazwisko" prefWidth="125.0" text="Nazwisko" />
+            <TableColumn fx:id="colAdres" prefWidth="167.0" text="Adres" />
+            <TableColumn fx:id="colNIP" prefWidth="113.0" text="NIP" />
+            <TableColumn fx:id="colTel" prefWidth="125.0" text="tel" />
          </columns>
       </TableView>
       <Button fx:id="btnFromClientsToCars" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToCars" prefHeight="42.0" prefWidth="153.0" text="Back to Samochody" />
       <Button fx:id="btnGoToRent" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToRent" prefHeight="42.0" prefWidth="137.0" text="Go to Wypożyczenia" />
+      <TextField fx:id="searchBox" layoutX="252.0" layoutY="101.0" onKeyTyped="#searchRecord" />
    </children>
 </AnchorPane>

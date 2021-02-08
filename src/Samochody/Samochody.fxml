@@ -12,17 +12,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Samochody.SamochodyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #3a364a;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Samochody.SamochodyController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #282533;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="550.0" prefWidth="232.0" spacing="20.0">
                <children>
-                  <TextField fx:id="tfId" disable="true" prefHeight="30.0" prefWidth="180.0" promptText="ID" style="-fx-background-color: #e0e0eb;">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </TextField>
                   <TextField fx:id="tfMarka" prefHeight="30.0" prefWidth="180.0" promptText="Marka">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
@@ -85,13 +80,13 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="table_cars" layoutX="228.0" layoutY="139.0" onMouseClicked="#handleMouseAction" prefHeight="411.0" prefWidth="469.0" style="-fx-background-color: #e6eeff;">
+      <TableView fx:id="table_cars" layoutX="228.0" layoutY="139.0" onMouseClicked="#handleMouseAction" prefHeight="512.0" prefWidth="674.0" style="-fx-background-color: #e6eeff;">
          <columns>
-            <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="colMarka" prefWidth="75.0" text="Marka" />
-            <TableColumn fx:id="colModel" prefWidth="92.0" text="Model" />
-            <TableColumn fx:id="colNrRej" prefWidth="97.0" text="Nr Rej." />
-            <TableColumn fx:id="colStan" prefWidth="115.0" text="Stan" />
+            <TableColumn fx:id="colId" prefWidth="75.0" text="ID" visible="false" />
+            <TableColumn fx:id="colMarka" prefWidth="110.0" text="Marka" />
+            <TableColumn fx:id="colModel" prefWidth="143.0" text="Model" />
+            <TableColumn fx:id="colNrRej" prefWidth="178.0" text="Nr Rej." />
+            <TableColumn fx:id="colStan" prefWidth="167.0" text="Stan" />
          </columns>
       </TableView>
       <Button fx:id="btnGoToClients" layoutX="247.0" layoutY="35.0" mnemonicParsing="false" onAction="#GoToClients" prefHeight="44.0" prefWidth="181.0" text="Go to KLIEICI" />

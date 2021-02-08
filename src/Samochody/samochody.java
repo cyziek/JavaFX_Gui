@@ -34,4 +34,6 @@ public class samochody {
     public String getStan() {
         return this.stan;
     }
+
+
 }

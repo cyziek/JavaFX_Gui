@@ -101,8 +101,8 @@ public class SamochodyController implements Initializable {
                 samochody sam = new samochody(rs.getInt("id"), rs.getString("marka"), rs.getString("model"), rs.getString("nrRej"), rs.getString("stan"));
                 samochodyList.add(sam);
             }
-        } catch (Exception var7) {
-            var7.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return samochodyList;
@@ -212,7 +212,7 @@ public class SamochodyController implements Initializable {
             Scene RentScene = new Scene(RentView);
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setTitle("Wypożyczalnia - Klienci");
+            window.setTitle("Wypożyczalnia - Wypożyczenia");
             window.setScene(RentScene);
             window.show();
         }

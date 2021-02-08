@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="491.0" style="-fx-background-color: #016365;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Nowe_Wyp.Nowe_WypController">
+    <children>
+          <VBox layoutX="95.0" layoutY="1.0" prefHeight="546.0" prefWidth="319.0" spacing="20.0" style="-fx-background-color: #193c42;">
+              <children>
+                  <TextField fx:id="tfId" editable="false" prefHeight="24.0" prefWidth="279.0" promptText="ID_wypożyczenia" style="-fx-background-color: #e0e0eb;">
+                      <cursor>
+                          <Cursor fx:constant="DEFAULT" />
+                      </cursor>
+                  </TextField>
+                  <ComboBox fx:id="CB_Cars" editable="true" prefHeight="33.0" prefWidth="301.0" promptText="Samochod" />
+                  <ComboBox fx:id="CB_Clients" editable="true" prefHeight="33.0" prefWidth="305.0" promptText="Klient" />
+                  <DatePicker editable="false" prefHeight="30.0" prefWidth="293.0" promptText="Data wypożyczenia" />
+                  <DatePicker editable="false" prefHeight="30.0" prefWidth="301.0" promptText="Data zwrotu" />
+                  <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../icons/clear.png" />
+                      </image>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <VBox.margin>
+                          <Insets left="125.0" />
+                      </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="290.0" text="Dodaj Wypozyczenie" />
+              </children>
+              <padding>
+                  <Insets left="20.0" right="20.0" top="50.0" />
+              </padding>
+          </VBox>
+    </children>
+</AnchorPane>

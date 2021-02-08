@@ -7,8 +7,11 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import DatabaseConn.DBConnect;
+import Samochody.samochody;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -56,6 +60,9 @@ public class KlienciController implements Initializable{
 
     @FXML
     private TextField tfTel;
+
+    @FXML
+    private TextField searchBox;
 
     @FXML
     private TableView<klienci> table_clients;
@@ -106,7 +113,7 @@ public class KlienciController implements Initializable{
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
-                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getInt("NIP"), rs.getString("nr_tel"));
+                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("NIP"), rs.getString("nr_tel"));
                 klienciList.add(kl);
             }
         } catch (Exception var7) {
@@ -223,6 +230,46 @@ public class KlienciController implements Initializable{
         catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    @FXML
+    private void searchRecord(KeyEvent ke){
+
+        FilteredList<klienci> klienciFilteredList = new FilteredList<>(getClientsList(), p-> true );
+        searchBox.textProperty().addListener((observableValue, oldvalue, newvalue) -> {
+            klienciFilteredList.setPredicate(pers -> {
+
+                if(newvalue == null || newvalue.isEmpty()){
+                    return true;
+                }
+
+                String typedText = newvalue.toLowerCase();
+                if(pers.getImie_klienta().toLowerCase().contains(typedText)){
+                    return true;
+                }
+
+                if(pers.getNIP_klienta().toLowerCase().contains(typedText)){
+                    return true;
+                }
+
+                if(pers.getAdres_klienta().toLowerCase().contains(typedText)){
+                    return true;
+                }
+
+                if(pers.getNazwisko_klienta().toLowerCase().contains(typedText)){
+                    return true;
+                }
+
+                if(pers.getNr_tel_klienta().toLowerCase().contains(typedText)){
+                    return true;
+                }
+
+                return false;
+            });
+            SortedList<klienci> sortedList = new SortedList<>(klienciFilteredList);
+            sortedList.comparatorProperty().bind(table_clients.comparatorProperty());
+            table_clients.setItems(sortedList);
+        });
     }
 
 

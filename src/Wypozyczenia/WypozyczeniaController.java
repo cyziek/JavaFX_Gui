@@ -2,23 +2,39 @@ package Wypozyczenia;
 
 
 import DatabaseConn.DBConnect;
+import Klienci.KlienciController;
+import Klienci.klienci;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class WypozyczeniaController {
+public class WypozyczeniaController implements Initializable {
+
+    public void initialize(URL url, ResourceBundle rb) {
+        this.showRents();
+        DBConnect.getConnection();
+    }
+
+
+    @FXML
+    private Button btnOpenNewWyp;
 
     @FXML
     private TextField tfId;
@@ -36,35 +52,81 @@ public class WypozyczeniaController {
     private ImageView btnDelete;
 
     @FXML
-    private ComboBox CB_Cars;
+    private ComboBox CB_Samochod;
 
     @FXML
-    private TableView<?> table_clients;
+    private ComboBox<klienci> cbKlient;
+
+    @FXML
+    private TableView<wypozyczenia> table_wypozyczenia;
+    @FXML
+    private TableColumn<wypozyczenia, Integer> id_wyp;
+    @FXML
+    private TableColumn<wypozyczenia, String> imie_klienta;
+    @FXML
+    private TableColumn<wypozyczenia, String> nazwisko_klienta;
+    @FXML
+    private TableColumn<wypozyczenia, String> adres_klienta;
+    @FXML
+    private TableColumn<wypozyczenia, String> marka_sam;
+    @FXML
+    private TableColumn<wypozyczenia, String> model_sam;
+    @FXML
+    private TableColumn<wypozyczenia, String> nrRej_sam;
+
 
     @FXML
     void clearTextFields(MouseEvent event) {
-
+        System.out.println("");
     }
 
     @FXML
     void handleButtonAction(MouseEvent event) {
-
+        System.out.println("");
     }
 
     @FXML
     void handleMouseAction(MouseEvent event) {
-
+        System.out.println("");
     }
 
 
+    public ObservableList<wypozyczenia> getRentsList() {
+        ObservableList<wypozyczenia> RentsList = FXCollections.observableArrayList();
+        Connection conn = DBConnect.getConnection();
+        String query = "SELECT wypozyczenia.id_wyp, klienci.Imie, klienci.Nazwisko, klienci.Adres, samochody.marka, samochody.Model, samochody.NrRej FROM klienci,wypozyczenia, samochody WHERE klienci.id_klienta=wypozyczenia.id_klienta AND wypozyczenia.id_sam=samochody.id";
 
-    public void initialize(URL url, ResourceBundle rb) {
-        DBConnect.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                wypozyczenia wyp = new wypozyczenia(rs.getInt("id_wyp"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("marka"), rs.getString("Model"), rs.getString("NrRej"));
+                RentsList.add(wyp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return RentsList;
+    }
+
+    public void showRents() {
+        ObservableList<wypozyczenia> list = this.getRentsList();
+        this.id_wyp.setCellValueFactory(new PropertyValueFactory("id_wyp"));
+        this.imie_klienta.setCellValueFactory(new PropertyValueFactory("imie_klienta"));
+        this.nazwisko_klienta.setCellValueFactory(new PropertyValueFactory("nazwisko_klienta"));
+        this.adres_klienta.setCellValueFactory(new PropertyValueFactory("adres_klienta"));
+        this.marka_sam.setCellValueFactory(new PropertyValueFactory("marka_sam"));
+        this.model_sam.setCellValueFactory(new PropertyValueFactory("model_sam"));
+        this.nrRej_sam.setCellValueFactory(new PropertyValueFactory("nrRej_sam"));
+        this.table_wypozyczenia.setItems(list);
+
     }
 
 
     @FXML
-    private void btnRentPickClient(ActionEvent event){
+    private void btnRentPickClient(ActionEvent event) {
         try {
             Parent ClientsView = FXMLLoader.load(getClass().getResource("/Klienci/Klienci.fxml"));
             Scene ClientsScene = new Scene(ClientsView);
@@ -73,14 +135,13 @@ public class WypozyczeniaController {
             window.setTitle("Wypożyczalnia - Klienci");
             window.setScene(ClientsScene);
             window.show();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     @FXML
-    private void btnRentPickCar(ActionEvent event){
+    private void btnRentPickCar(ActionEvent event) {
         try {
             Parent CarsView = FXMLLoader.load(getClass().getResource("/Samochody/Samochody.fxml"));
             Scene CarsScene = new Scene(CarsView);
@@ -89,14 +150,66 @@ public class WypozyczeniaController {
             window.setTitle("Wypożyczalnia - Samochody");
             window.setScene(CarsScene);
             window.show();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void openNewWyp(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Nowe_Wyp/Nowe_Wypozyczenie.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Błąd: " + e);
+        }
+    }
+
+    private void executeQuery(String query) {
+        Connection conn = DBConnect.getConnection();
+
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception var5) {
+            var5.printStackTrace();
         }
     }
 
 
 
+    public ObservableList<klienci> getClientsList() {
+        ObservableList<klienci> klienciList = FXCollections.observableArrayList();
+        Connection conn = DBConnect.getConnection();
+        String query = "SELECT * FROM klienci";
 
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while(rs.next()) {
+                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("NIP"), rs.getString("nr_tel"));
+                klienciList.add(kl);
+
+            }
+
+
+        } catch (Exception var7) {
+            var7.printStackTrace();
+        }
+
+        return klienciList;
+    }
+
+    @FXML
+    private void cbClientHandle(ActionEvent e) {
+
+        cbKlient.setItems(getClientsList());
+        new AutoCompleteComboBoxListener<>(cbKlient);
+
+}
 
 }

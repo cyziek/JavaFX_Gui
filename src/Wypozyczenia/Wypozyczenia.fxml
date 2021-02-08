@@ -5,26 +5,21 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: #016365;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Wypozyczenia.WypozyczeniaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #016365;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Wypozyczenia.WypozyczeniaController">
    <children>
       <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #012832;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="550.0" prefWidth="228.0" spacing="20.0">
                <children>
-                  <TextField fx:id="tfId" prefHeight="23.0" prefWidth="180.0" promptText="ID_wypożyczenia" style="-fx-background-color: #e0e0eb;">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </TextField>
-                  <ComboBox fx:id="CB_Cars" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
-                  <ComboBox fx:id="CB_Clients" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
+                  <ComboBox fx:id="cbKlient" editable="true" onAction="#cbClientHandle" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
+                  <ComboBox fx:id="CB_Samochod" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
                   <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data wypożyczenia" />
                   <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data zwrotu" />
                   <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
@@ -38,6 +33,7 @@
                         <Insets left="125.0" />
                      </VBox.margin>
                   </ImageView>
+                  <Button fx:id="btnOpenNewWyp" mnemonicParsing="false" onAction="#openNewWyp" prefHeight="49.0" prefWidth="188.0" text="NOWE WYP" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" top="50.0" />
@@ -69,7 +65,16 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="table_clients" layoutX="228.0" layoutY="100.0" onMouseClicked="#handleMouseAction" prefHeight="450.0" prefWidth="469.0" style="-fx-background-color: #cdfefe;" />
+      <TableView fx:id="table_wypozyczenia" layoutX="229.0" layoutY="133.0" onMouseClicked="#handleMouseAction" prefHeight="517.0" prefWidth="671.0" style="-fx-background-color: #cdfefe;">
+         <columns>
+            <TableColumn fx:id="id_wyp" prefWidth="44.0" text="id_wyp" />
+            <TableColumn fx:id="imie_klienta" prefWidth="83.0" text="Imię klienta" />
+            <TableColumn fx:id="nazwisko_klienta" prefWidth="109.0" text="Nazwisko Klienta" />
+            <TableColumn fx:id="adres_klienta" prefWidth="149.0" text="Adres Klienta" />
+            <TableColumn fx:id="marka_sam" prefWidth="87.0" text="Marka" />
+            <TableColumn fx:id="model_sam" prefWidth="88.0" text="Model" />
+            <TableColumn fx:id="nrRej_sam" prefWidth="110.0" text="Numer Rej" />
+         </columns></TableView>
       <Button fx:id="btnRentPickClient" layoutX="251.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnRentPickClient" prefHeight="33.0" prefWidth="146.0" text="Wybór Klienta" />
       <Button fx:id="btnRentPickCar" layoutX="463.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnRentPickCar" prefHeight="33.0" prefWidth="152.0" text="Wybór Samochodu" />
    </children>
