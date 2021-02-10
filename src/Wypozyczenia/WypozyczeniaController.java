@@ -4,6 +4,8 @@ package Wypozyczenia;
 import DatabaseConn.DBConnect;
 import Klienci.KlienciController;
 import Klienci.klienci;
+import Samochody.SamochodyController;
+import Samochody.samochody;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -24,6 +27,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static Samochody.SamochodyController.getCarsList;
 
 public class WypozyczeniaController implements Initializable {
 
@@ -52,7 +57,13 @@ public class WypozyczeniaController implements Initializable {
     private ImageView btnDelete;
 
     @FXML
-    private ComboBox CB_Samochod;
+    private ImageView btnRentPickClient;
+
+    @FXML
+    private ImageView btnRentPickCar;
+
+    @FXML
+    private ComboBox<samochody> CB_Samochod;
 
     @FXML
     private ComboBox<klienci> cbKlient;
@@ -124,9 +135,15 @@ public class WypozyczeniaController implements Initializable {
 
     }
 
+    @FXML
+    private void clearTextFieldss(MouseEvent event){ //przycisk od czyszczenia
+        cbKlient.getSelectionModel().select(-1);
+        CB_Samochod.getSelectionModel().select(-1);
+    }
+
 
     @FXML
-    private void btnRentPickClient(ActionEvent event) {
+    private void btnRentPickClient(MouseEvent event) {
         try {
             Parent ClientsView = FXMLLoader.load(getClass().getResource("/Klienci/Klienci.fxml"));
             Scene ClientsScene = new Scene(ClientsView);
@@ -141,7 +158,7 @@ public class WypozyczeniaController implements Initializable {
     }
 
     @FXML
-    private void btnRentPickCar(ActionEvent event) {
+    private void btnRentPickCar(MouseEvent event) {
         try {
             Parent CarsView = FXMLLoader.load(getClass().getResource("/Samochody/Samochody.fxml"));
             Scene CarsScene = new Scene(CarsView);
@@ -149,6 +166,7 @@ public class WypozyczeniaController implements Initializable {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Wypożyczalnia - Samochody");
             window.setScene(CarsScene);
+            window.setResizable(false);
             window.show();
         } catch (Exception e) {
             System.out.println(e);
@@ -179,37 +197,17 @@ public class WypozyczeniaController implements Initializable {
         }
     }
 
-
-
-    public ObservableList<klienci> getClientsList() {
-        ObservableList<klienci> klienciList = FXCollections.observableArrayList();
-        Connection conn = DBConnect.getConnection();
-        String query = "SELECT * FROM klienci";
-
-        try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-
-            while(rs.next()) {
-                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("NIP"), rs.getString("nr_tel"));
-                klienciList.add(kl);
-
-            }
-
-
-        } catch (Exception var7) {
-            var7.printStackTrace();
-        }
-
-        return klienciList;
-    }
-
     @FXML
-    private void cbClientHandle(ActionEvent e) {
+    private void cbClientHandle(MouseEvent e) {
 
-        cbKlient.setItems(getClientsList());
+        cbKlient.setItems(KlienciController.getClientsList());
         new AutoCompleteComboBoxListener<>(cbKlient);
+}
 
+@FXML
+    private void cbCarHandle(MouseEvent e){
+        CB_Samochod.setItems(SamochodyController.getCarsList());
+        new AutoCompleteComboBoxListener<>(CB_Samochod);
 }
 
 }

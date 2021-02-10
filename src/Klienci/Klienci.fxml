@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -45,6 +44,7 @@
                         <Insets left="125.0" />
                      </VBox.margin>
                   </ImageView>
+                  <TextField fx:id="tfId" editable="false" focusTraversable="false" prefHeight="0.0" prefWidth="188.0" visible="false" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" top="50.0" />
@@ -86,8 +86,22 @@
             <TableColumn fx:id="colTel" prefWidth="125.0" text="tel" />
          </columns>
       </TableView>
-      <Button fx:id="btnFromClientsToCars" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToCars" prefHeight="42.0" prefWidth="153.0" text="Back to Samochody" />
-      <Button fx:id="btnGoToRent" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#fromClientsToRent" prefHeight="42.0" prefWidth="137.0" text="Go to Wypożyczenia" />
-      <TextField fx:id="searchBox" layoutX="252.0" layoutY="101.0" onKeyTyped="#searchRecord" />
+      <TextField fx:id="searchBox" layoutX="252.0" layoutY="101.0" onKeyTyped="#searchRecord" promptText="Wyszukaj..." />
+      <ImageView fx:id="btnFromClientsToCars" fitHeight="76.0" fitWidth="70.0" layoutX="292.0" layoutY="8.0" onMouseClicked="#fromClientsToCars" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/car.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="btnGoToRent" fitHeight="70.0" fitWidth="85.0" layoutX="571.0" layoutY="14.0" onMouseClicked="#fromClientsToRent" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/rents.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

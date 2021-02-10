@@ -68,13 +68,6 @@ public class klienci {
 
     @Override
     public String toString() {
-        return "klienci{" +
-                "id_klienta=" + id_klienta +
-                ", imie_klienta='" + imie_klienta + '\'' +
-                ", nazwisko_klienta='" + nazwisko_klienta + '\'' +
-                ", adres_klienta='" + adres_klienta + '\'' +
-                ", NIP_klienta='" + NIP_klienta + '\'' +
-                ", nr_tel_klienta='" + nr_tel_klienta + '\'' +
-                '}';
+        return  imie_klienta + " "+ nazwisko_klienta + " " + adres_klienta;
     }
 }

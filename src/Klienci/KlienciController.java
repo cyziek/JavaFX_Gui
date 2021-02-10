@@ -63,6 +63,11 @@ public class KlienciController implements Initializable{
 
     @FXML
     private TextField searchBox;
+    @FXML
+    private ImageView btnFromClientsToCars;
+    @FXML
+    private ImageView btnGoToRent;
+
 
     @FXML
     private TableView<klienci> table_clients;
@@ -103,7 +108,7 @@ public class KlienciController implements Initializable{
         DBConnect.getConnection();
     }
 
-    public ObservableList<klienci> getClientsList() {
+    public static ObservableList<klienci> getClientsList() {
         ObservableList<klienci> klienciList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM klienci";
@@ -199,7 +204,7 @@ public class KlienciController implements Initializable{
     }
 
     @FXML
-    private void fromClientsToCars(ActionEvent event){
+    private void fromClientsToCars(MouseEvent event){
         try {
            Parent CarsView = FXMLLoader.load(getClass().getResource("/Samochody/Samochody.fxml"));
             Scene CarsScene = new Scene(CarsView);
@@ -208,6 +213,7 @@ public class KlienciController implements Initializable{
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Wypożyczalnia - Samochody");
             window.setScene(CarsScene);
+            window.setResizable(false);
             window.show();
         }
         catch (Exception e){
@@ -217,7 +223,7 @@ public class KlienciController implements Initializable{
     }
 
     @FXML
-    private void fromClientsToRent(ActionEvent event){
+    private void fromClientsToRent(MouseEvent event){
         try {
             Parent RentView = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
             Scene RentScene = new Scene(RentView);
@@ -225,6 +231,7 @@ public class KlienciController implements Initializable{
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Wypożyczalnia - Wypożyczenia");
             window.setScene(RentScene);
+            window.setResizable(false);
             window.show();
         }
         catch (Exception e){

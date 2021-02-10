@@ -18,11 +18,11 @@
          <children>
             <VBox prefHeight="550.0" prefWidth="228.0" spacing="20.0">
                <children>
-                  <ComboBox fx:id="cbKlient" editable="true" onAction="#cbClientHandle" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
-                  <ComboBox fx:id="CB_Samochod" editable="true" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
+                  <ComboBox fx:id="cbKlient" editable="true" onMouseClicked="#cbClientHandle" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
+                  <ComboBox fx:id="CB_Samochod" editable="true" onMouseClicked="#cbCarHandle" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
                   <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data wypożyczenia" />
                   <DatePicker editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data zwrotu" />
-                  <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFieldss" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/clear.png" />
                      </image>
@@ -75,7 +75,21 @@
             <TableColumn fx:id="model_sam" prefWidth="88.0" text="Model" />
             <TableColumn fx:id="nrRej_sam" prefWidth="110.0" text="Numer Rej" />
          </columns></TableView>
-      <Button fx:id="btnRentPickClient" layoutX="251.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnRentPickClient" prefHeight="33.0" prefWidth="146.0" text="Wybór Klienta" />
-      <Button fx:id="btnRentPickCar" layoutX="463.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnRentPickCar" prefHeight="33.0" prefWidth="152.0" text="Wybór Samochodu" />
+      <ImageView fx:id="btnRentPickClient" fitHeight="76.0" fitWidth="70.0" layoutX="309.0" layoutY="21.0" onMouseClicked="#btnRentPickClient" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/client.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="btnRentPickCar" fitHeight="76.0" fitWidth="70.0" layoutX="629.0" layoutY="21.0" onMouseClicked="#btnRentPickCar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/car.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -62,7 +62,10 @@ public class SamochodyController implements Initializable {
     private ImageView btnDelete;
     @FXML
     private ImageView btnClear;
-
+    @FXML
+    private ImageView btnCarToRent;
+    @FXML
+    private ImageView btnGoToClients;
 
 
    // public MainController() {
@@ -88,7 +91,7 @@ public class SamochodyController implements Initializable {
 
 
 
-    public ObservableList<samochody> getCarsList() {
+    public static ObservableList<samochody> getCarsList() {
         ObservableList<samochody> samochodyList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM samochody";
@@ -128,10 +131,13 @@ public class SamochodyController implements Initializable {
 
     private void insertRecord() {
         try {
-            String query = "INSERT INTO samochody (marka, model, nrRej, stan) VALUES ('" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
-            this.executeQuery(query);
-            this.showCars();
-            clearTextFields(null);
+            if(!(tfMarka.getText().isEmpty())&&(tfModel.getText().isEmpty())&&(tfNrRej.getText().isEmpty())) {
+                String query = "INSERT INTO samochody (marka, model, nrRej, stan) VALUES ('" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
+                this.executeQuery(query);
+                this.showCars();
+                clearTextFields(null);
+            }
+            else System.err.println("Pola nie mogą być puste!");
         }
         catch (Exception e){
 
@@ -139,8 +145,8 @@ public class SamochodyController implements Initializable {
     }
 
     private void updateRecord() {
-        String query = "UPDATE  samochody SET marka  = '" + this.tfMarka.getText() + "', model = '" + this.tfModel.getText() + "', nrRej = '" + this.tfNrRej.getText() + "', stan = '" + this.cbSTan.getValue() + "' WHERE id = " + this.tfId.getText() + "";
 
+        String query = "UPDATE  samochody SET marka  = '" + this.tfMarka.getText() + "', model = '" + this.tfModel.getText() + "', nrRej = '" + this.tfNrRej.getText() + "', stan = '" + this.cbSTan.getValue() + "' WHERE id = " + this.tfId.getText() + "";
         this.executeQuery(query);
         this.showCars();
         clearTextFields(null);
@@ -189,7 +195,7 @@ public class SamochodyController implements Initializable {
     }
 
     @FXML
-    private void GoToClients(ActionEvent event){
+    private void GoToClients(MouseEvent event){
     try {
         Parent ClientsView = FXMLLoader.load(getClass().getResource("/Klienci/Klienci.fxml"));
         Scene ClientsScene = new Scene(ClientsView);
@@ -197,6 +203,7 @@ public class SamochodyController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Wypożyczalnia - Klienci");
         window.setScene(ClientsScene);
+        window.setResizable(false);
         window.show();
     }
     catch (Exception e){
@@ -206,7 +213,7 @@ public class SamochodyController implements Initializable {
     }
 
     @FXML
-    private void btnCarToRent(ActionEvent event){
+    private void fromCarToRent(MouseEvent event){
         try {
             Parent RentView = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
             Scene RentScene = new Scene(RentView);
@@ -214,6 +221,7 @@ public class SamochodyController implements Initializable {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Wypożyczalnia - Wypożyczenia");
             window.setScene(RentScene);
+            window.setResizable(false);
             window.show();
         }
         catch (Exception e){

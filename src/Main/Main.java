@@ -7,14 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-   // public Main() {
-   // }
 
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Wypożyczalnia - Samochody");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
     }

@@ -35,5 +35,8 @@ public class samochody {
         return this.stan;
     }
 
-
+    @Override
+    public String toString() {
+        return marka +" "+ model +", "+ nrRej;
+    }
 }
