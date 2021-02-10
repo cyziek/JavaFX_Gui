@@ -118,7 +118,7 @@ public class KlienciController implements Initializable{
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
-                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("NIP"), rs.getString("nr_tel"));
+                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getInt("NIP"), rs.getString("nr_tel"));
                 klienciList.add(kl);
             }
         } catch (Exception var7) {
@@ -169,7 +169,7 @@ public class KlienciController implements Initializable{
     }
 
     private void insertRecord() {
-        String query = "INSERT INTO klienci VALUES (" + this.tfId.getText() + ",'" + this.tfImie.getText() + "','" + this.tfNazwisko.getText() + "','" + this.tfAdres.getText() + "', '" + this.tfNIP.getText() + "', '" + this.tfTel.getText() + "')";
+        String query = "INSERT INTO klienci (Imie, Nazwisko, Adres, NIP, nr_tel) VALUES ('" +  this.tfImie.getText() + "','" + this.tfNazwisko.getText() + "','" + this.tfAdres.getText() + "', " + this.tfNIP.getText() + ", '" + this.tfTel.getText() + "')";
         this.executeQuery(query);
         this.showClients();
         clearTextFields(null);
@@ -255,9 +255,9 @@ public class KlienciController implements Initializable{
                     return true;
                 }
 
-                if(pers.getNIP_klienta().toLowerCase().contains(typedText)){
-                    return true;
-                }
+//                if(pers.getNIP_klienta().toLowerCase().contains(typedText)){
+//                    return true;
+//                }
 
                 if(pers.getAdres_klienta().toLowerCase().contains(typedText)){
                     return true;

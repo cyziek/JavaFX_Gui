@@ -1,23 +1,27 @@
 package Wypozyczenia;
 
 
+import java.util.Date;
+
 public class wypozyczenia {
     private int id_wyp;
     private String imie_klienta;
     private String nazwisko_klienta;
-    private String adres_klienta;
     private String marka_sam;
     private String model_sam;
     private String nrRej_sam;
+    private Date data_wyp;
+    private Date data_zwr;
 
-    public wypozyczenia(int id_wyp, String imie_klienta, String nazwisko_klienta, String adres_klienta, String marka_sam, String model_sam, String nrRej_sam) {
+    public wypozyczenia(int id_wyp, String imie_klienta, String nazwisko_klienta, String marka_sam, String model_sam, String nrRej_sam, Date data_wyp, Date data_zwr) {
         this.id_wyp = id_wyp;
         this.imie_klienta = imie_klienta;
         this.nazwisko_klienta = nazwisko_klienta;
-        this.adres_klienta = adres_klienta;
         this.marka_sam = marka_sam;
         this.model_sam = model_sam;
         this.nrRej_sam = nrRej_sam;
+        this.data_wyp = data_wyp;
+        this.data_zwr = data_zwr;
     }
 
     public int getId_wyp() {
@@ -44,14 +48,6 @@ public class wypozyczenia {
         this.nazwisko_klienta = nazwisko_klienta;
     }
 
-    public String getAdres_klienta() {
-        return adres_klienta;
-    }
-
-    public void setAdres_klienta(String adres_klienta) {
-        this.adres_klienta = adres_klienta;
-    }
-
     public String getMarka_sam() {
         return marka_sam;
     }
@@ -74,5 +70,21 @@ public class wypozyczenia {
 
     public void setNrRej_sam(String nrRej_sam) {
         this.nrRej_sam = nrRej_sam;
+    }
+
+    public Date getData_wyp() {
+        return data_wyp;
+    }
+
+    public void setData_wyp(Date data_wyp) {
+        this.data_wyp = data_wyp;
+    }
+
+    public Date getData_zwr() {
+        return data_zwr;
+    }
+
+    public void setData_zwr(Date data_zwr) {
+        this.data_zwr = data_zwr;
     }
 }

@@ -131,7 +131,7 @@ public class SamochodyController implements Initializable {
 
     private void insertRecord() {
         try {
-            if(!(tfMarka.getText().isEmpty())&&(tfModel.getText().isEmpty())&&(tfNrRej.getText().isEmpty())) {
+            if(!((tfMarka.getText().isEmpty())&&(tfModel.getText().isEmpty())&&(tfNrRej.getText().isEmpty()))) {
                 String query = "INSERT INTO samochody (marka, model, nrRej, stan) VALUES ('" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
                 this.executeQuery(query);
                 this.showCars();

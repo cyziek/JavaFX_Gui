@@ -21,11 +21,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static Samochody.SamochodyController.getCarsList;
@@ -67,7 +71,10 @@ public class WypozyczeniaController implements Initializable {
 
     @FXML
     private ComboBox<klienci> cbKlient;
-
+    @FXML
+    private DatePicker dpWyp;
+    @FXML
+    private DatePicker dpZwr;
     @FXML
     private TableView<wypozyczenia> table_wypozyczenia;
     @FXML
@@ -76,14 +83,18 @@ public class WypozyczeniaController implements Initializable {
     private TableColumn<wypozyczenia, String> imie_klienta;
     @FXML
     private TableColumn<wypozyczenia, String> nazwisko_klienta;
-    @FXML
-    private TableColumn<wypozyczenia, String> adres_klienta;
+  //  @FXML
+  //  private TableColumn<wypozyczenia, String> adres_klienta;
     @FXML
     private TableColumn<wypozyczenia, String> marka_sam;
     @FXML
     private TableColumn<wypozyczenia, String> model_sam;
     @FXML
     private TableColumn<wypozyczenia, String> nrRej_sam;
+    @FXML
+    private TableColumn<wypozyczenia, String> data_wyp;
+    @FXML
+    private TableColumn<wypozyczenia, String> data_zwr;
 
 
     @FXML
@@ -101,18 +112,19 @@ public class WypozyczeniaController implements Initializable {
         System.out.println("");
     }
 
+ //   ComboBox<klienci> cbkl = new ComboBox<klienci>();
 
     public ObservableList<wypozyczenia> getRentsList() {
         ObservableList<wypozyczenia> RentsList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
-        String query = "SELECT wypozyczenia.id_wyp, klienci.Imie, klienci.Nazwisko, klienci.Adres, samochody.marka, samochody.Model, samochody.NrRej FROM klienci,wypozyczenia, samochody WHERE klienci.id_klienta=wypozyczenia.id_klienta AND wypozyczenia.id_sam=samochody.id";
+        String query = "SELECT wypozyczenia.id_wyp, klienci.Imie, klienci.Nazwisko, samochody.marka, samochody.Model, samochody.NrRej, wypozyczenia.DataWyp, wypozyczenia.DataZwr  FROM klienci,wypozyczenia, samochody WHERE klienci.id_klienta=wypozyczenia.id_klienta AND wypozyczenia.id_sam=samochody.id";
 
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                wypozyczenia wyp = new wypozyczenia(rs.getInt("id_wyp"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getString("marka"), rs.getString("Model"), rs.getString("NrRej"));
+                wypozyczenia wyp = new wypozyczenia(rs.getInt("id_wyp"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("marka"), rs.getString("Model"), rs.getString("NrRej"), rs.getDate("DataWyp"), rs.getDate("DataZwr"));
                 RentsList.add(wyp);
             }
         } catch (Exception e) {
@@ -122,18 +134,23 @@ public class WypozyczeniaController implements Initializable {
         return RentsList;
     }
 
+
+
     public void showRents() {
         ObservableList<wypozyczenia> list = this.getRentsList();
         this.id_wyp.setCellValueFactory(new PropertyValueFactory("id_wyp"));
         this.imie_klienta.setCellValueFactory(new PropertyValueFactory("imie_klienta"));
         this.nazwisko_klienta.setCellValueFactory(new PropertyValueFactory("nazwisko_klienta"));
-        this.adres_klienta.setCellValueFactory(new PropertyValueFactory("adres_klienta"));
         this.marka_sam.setCellValueFactory(new PropertyValueFactory("marka_sam"));
         this.model_sam.setCellValueFactory(new PropertyValueFactory("model_sam"));
         this.nrRej_sam.setCellValueFactory(new PropertyValueFactory("nrRej_sam"));
+        this.data_wyp.setCellValueFactory(new PropertyValueFactory("data_wyp"));
+        this.data_zwr.setCellValueFactory(new PropertyValueFactory("data_zwr"));
         this.table_wypozyczenia.setItems(list);
 
     }
+
+
 
     @FXML
     private void clearTextFieldss(MouseEvent event){ //przycisk od czyszczenia
@@ -173,18 +190,6 @@ public class WypozyczeniaController implements Initializable {
         }
     }
 
-    @FXML
-    private void openNewWyp(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Nowe_Wyp/Nowe_Wypozyczenie.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Błąd: " + e);
-        }
-    }
 
     private void executeQuery(String query) {
         Connection conn = DBConnect.getConnection();
@@ -201,7 +206,10 @@ public class WypozyczeniaController implements Initializable {
     private void cbClientHandle(MouseEvent e) {
 
         cbKlient.setItems(KlienciController.getClientsList());
+
+      //  cbkl.setItems(KlienciController.getClientsList());
         new AutoCompleteComboBoxListener<>(cbKlient);
+
 }
 
 @FXML
@@ -209,5 +217,31 @@ public class WypozyczeniaController implements Initializable {
         CB_Samochod.setItems(SamochodyController.getCarsList());
         new AutoCompleteComboBoxListener<>(CB_Samochod);
 }
+
+//@FXML
+//    private void InsertHandle(MouseEvent e) {
+//    System.out.println(cbKlient.getSelectionModel().getSelectedItem().getId_klienta());
+//    // int idkl = cbkl.getValue().getId_klienta();
+//
+////        int idsam = CB_Samochod.getSelectionModel().getSelectedItem().getId();
+////        String markaSam = CB_Samochod.getSelectionModel().getSelectedItem().getMarka();
+////        String ModelSam = CB_Samochod.getSelectionModel().getSelectedItem().getModel();
+////        String RejSam = CB_Samochod.getSelectionModel().getSelectedItem().getNrRej();
+//        LocalDate datWyp = dpWyp.getValue();
+//        LocalDate datZwr = dpZwr.getValue();
+//        try {
+//
+//
+//               // String query = "INSERT INTO wypozyczenia (id_klienta, id_sam, Marka, Model, nrRej, DataWyp, DataZwr ) VALUES (" + idkl + "," + idsam + ",'" + markaSam + "', '" + ModelSam + "','" + RejSam + "', "+datWyp + ", "+ datZwr+")";
+//              //  this.executeQuery(query);
+//              //  this.showRents();
+//                clearTextFields(null);
+//               }
+//        catch (Exception errr){
+//
+//        }
+    }
+
+
 
 }

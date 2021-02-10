@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Wypozyczenia/Wypozyczenia.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Samochody/Samochody.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Wypożyczalnia - Samochody");
         stage.setScene(scene);

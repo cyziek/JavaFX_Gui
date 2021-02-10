@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Klienci.KlienciController">
    <children>
@@ -16,6 +18,11 @@
          <children>
             <VBox prefHeight="550.0" prefWidth="228.0" spacing="20.0">
                <children>
+                  <Label prefHeight="44.0" prefWidth="199.0" text="           Klienci" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                   <TextField fx:id="tfImie" prefHeight="30.0" prefWidth="180.0" promptText="Imie">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
@@ -47,7 +54,7 @@
                   <TextField fx:id="tfId" editable="false" focusTraversable="false" prefHeight="0.0" prefWidth="188.0" visible="false" />
                </children>
                <padding>
-                  <Insets left="20.0" right="20.0" top="50.0" />
+                  <Insets left="20.0" right="20.0" top="5.0" />
                </padding>
             </VBox>
             <ImageView fx:id="btnInsert" fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="467.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
@@ -87,7 +94,7 @@
          </columns>
       </TableView>
       <TextField fx:id="searchBox" layoutX="252.0" layoutY="101.0" onKeyTyped="#searchRecord" promptText="Wyszukaj..." />
-      <ImageView fx:id="btnFromClientsToCars" fitHeight="76.0" fitWidth="70.0" layoutX="292.0" layoutY="8.0" onMouseClicked="#fromClientsToCars" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnFromClientsToCars" fitHeight="76.0" fitWidth="70.0" layoutX="415.0" layoutY="8.0" onMouseClicked="#fromClientsToCars" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/car.png" />
          </image>
@@ -95,7 +102,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="btnGoToRent" fitHeight="70.0" fitWidth="85.0" layoutX="571.0" layoutY="14.0" onMouseClicked="#fromClientsToRent" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnGoToRent" fitHeight="70.0" fitWidth="85.0" layoutX="571.0" layoutY="10.0" onMouseClicked="#fromClientsToRent" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/rents.png" />
          </image>
@@ -103,5 +110,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Label layoutX="419.0" layoutY="85.0" text="Samochody" textFill="WHITE" />
+      <Label layoutX="565.0" layoutY="85.0" text="Wypożyczenia" textFill="WHITE" />
    </children>
 </AnchorPane>

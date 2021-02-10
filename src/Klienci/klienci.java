@@ -6,17 +6,17 @@ public class klienci {
    private String imie_klienta;
    private String nazwisko_klienta;
    private String adres_klienta;
-   private String NIP_klienta;
+   private int NIP_klienta;
    private String nr_tel_klienta;
 
-   public klienci(int id_klienta, String imie_klienta, String nazwisko_klienta, String adres_klienta, String NIP_klienta, String nr_tel_klienta){
-       this.id_klienta = id_klienta;
-       this.imie_klienta = imie_klienta;
-       this.nazwisko_klienta = nazwisko_klienta;
-       this.adres_klienta = adres_klienta;
-       this.NIP_klienta = NIP_klienta;
-       this.nr_tel_klienta = nr_tel_klienta;
-   }
+    public klienci(int id_klienta, String imie_klienta, String nazwisko_klienta, String adres_klienta, int NIP_klienta, String nr_tel_klienta) {
+        this.id_klienta = id_klienta;
+        this.imie_klienta = imie_klienta;
+        this.nazwisko_klienta = nazwisko_klienta;
+        this.adres_klienta = adres_klienta;
+        this.NIP_klienta = NIP_klienta;
+        this.nr_tel_klienta = nr_tel_klienta;
+    }
 
     public int getId_klienta() {
         return id_klienta;
@@ -50,11 +50,11 @@ public class klienci {
         this.adres_klienta = adres_klienta;
     }
 
-    public String getNIP_klienta() {
+    public int getNIP_klienta() {
         return NIP_klienta;
     }
 
-    public void setNIP_klienta(String NIP_klienta) {
+    public void setNIP_klienta(int NIP_klienta) {
         this.NIP_klienta = NIP_klienta;
     }
 
