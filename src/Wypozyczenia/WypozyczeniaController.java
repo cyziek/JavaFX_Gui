@@ -3,9 +3,9 @@ package Wypozyczenia;
 
 import DatabaseConn.DBConnect;
 import Klienci.KlienciController;
-import Klienci.Klienci;
+import Klienci.klienci;
 import Samochody.SamochodyController;
-import Samochody.Samochody;
+import Samochody.samochody;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,64 +18,110 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import static Samochody.SamochodyController.getCarsList;
 
 public class WypozyczeniaController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         this.showRents();
         DBConnect.getConnection();
-
-        CB_Klient.setItems(KlienciController.getClientsList());
-        // new AutoCompleteComboBoxListener<>(CB_Klient);
-
         CB_Samochod.setItems(SamochodyController.getCarsList());
         // new AutoCompleteComboBoxListener<>(CB_Samochod);
-
+        cbKlient.setItems(KlienciController.getClientsList());
+        // new AutoCompleteComboBoxListener<>(cbKlient);
     }
 
 
+    @FXML
+    private Button btnOpenNewWyp;
 
     @FXML
-    private ComboBox<Samochody> CB_Samochod;
+    private TextField tfId;
 
     @FXML
-    private ComboBox<Klienci> CB_Klient;
+    private ImageView btnClear;
+
+    @FXML
+    private ImageView btnInsert;
+
+    @FXML
+    private ImageView btnUpdate;
+
+    @FXML
+    private ImageView btnDelete;
+
+    @FXML
+    private ImageView btnRentPickClient;
+
+    @FXML
+    private ImageView btnRentPickCar;
+
+    @FXML
+    private ComboBox<samochody> CB_Samochod;
+
+    @FXML
+    private ComboBox<klienci> cbKlient;
     @FXML
     private DatePicker dpWyp;
     @FXML
     private DatePicker dpZwr;
     @FXML
-    private TableView<Wypozyczenia> table_wypozyczenia;
+    private TableView<wypozyczenia> table_wypozyczenia;
     @FXML
-    private TableColumn<Wypozyczenia, Integer> id_wyp;
+    private TableColumn<wypozyczenia, Integer> id_wyp;
     @FXML
-    private TableColumn<Wypozyczenia, String> imie_klienta;
+    private TableColumn<wypozyczenia, String> imie_klienta;
     @FXML
-    private TableColumn<Wypozyczenia, String> nazwisko_klienta;
+    private TableColumn<wypozyczenia, String> nazwisko_klienta;
+  //  @FXML
+  //  private TableColumn<wypozyczenia, String> adres_klienta;
     @FXML
-    private TableColumn<Wypozyczenia, String> marka_sam;
+    private TableColumn<wypozyczenia, String> marka_sam;
     @FXML
-    private TableColumn<Wypozyczenia, String> model_sam;
+    private TableColumn<wypozyczenia, String> model_sam;
     @FXML
-    private TableColumn<Wypozyczenia, String> nrRej_sam;
+    private TableColumn<wypozyczenia, String> nrRej_sam;
     @FXML
-    private TableColumn<Wypozyczenia, String> data_wyp;
+    private TableColumn<wypozyczenia, String> data_wyp;
     @FXML
-    private TableColumn<Wypozyczenia, String> data_zwr;
+    private TableColumn<wypozyczenia, String> data_zwr;
 
+    private klienci kltemp;
+    private samochody samtemp;
 
+    @FXML
+    void clearTextFields(MouseEvent event) {
+        System.out.println("");
+    }
 
+    @FXML
+    void handleButtonAction(MouseEvent event) {
+        System.out.println("");
+    }
 
-    public ObservableList<Wypozyczenia> getRentsList() {
-        ObservableList<Wypozyczenia> RentsList = FXCollections.observableArrayList();
+    @FXML
+    void handleMouseAction(MouseEvent event) {
+        System.out.println("");
+    }
+
+ //   ComboBox<klienci> cbkl = new ComboBox<klienci>();
+
+    public ObservableList<wypozyczenia> getRentsList() {
+        ObservableList<wypozyczenia> RentsList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT wypozyczenia.id_wyp, klienci.Imie, klienci.Nazwisko, samochody.marka, samochody.Model, samochody.NrRej, wypozyczenia.DataWyp, wypozyczenia.DataZwr  FROM klienci,wypozyczenia, samochody WHERE klienci.id_klienta=wypozyczenia.id_klienta AND wypozyczenia.id_sam=samochody.id";
 
@@ -84,7 +130,7 @@ public class WypozyczeniaController implements Initializable {
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                Wypozyczenia wyp = new Wypozyczenia(rs.getInt("id_wyp"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("marka"), rs.getString("Model"), rs.getString("NrRej"), rs.getDate("DataWyp"), rs.getDate("DataZwr"));
+                wypozyczenia wyp = new wypozyczenia(rs.getInt("id_wyp"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("marka"), rs.getString("Model"), rs.getString("NrRej"), rs.getDate("DataWyp"), rs.getDate("DataZwr"));
                 RentsList.add(wyp);
             }
         } catch (Exception e) {
@@ -94,8 +140,10 @@ public class WypozyczeniaController implements Initializable {
         return RentsList;
     }
 
+
+
     public void showRents() {
-        ObservableList<Wypozyczenia> list = this.getRentsList();
+        ObservableList<wypozyczenia> list = this.getRentsList();
         this.id_wyp.setCellValueFactory(new PropertyValueFactory("id_wyp"));
         this.imie_klienta.setCellValueFactory(new PropertyValueFactory("imie_klienta"));
         this.nazwisko_klienta.setCellValueFactory(new PropertyValueFactory("nazwisko_klienta"));
@@ -106,14 +154,14 @@ public class WypozyczeniaController implements Initializable {
         this.data_zwr.setCellValueFactory(new PropertyValueFactory("data_zwr"));
         this.table_wypozyczenia.setItems(list);
 
-
     }
+
+
 
     @FXML
     private void clearTextFieldss(MouseEvent event){ //przycisk od czyszczenia
-        CB_Klient.getSelectionModel().select(-1);
+        cbKlient.getSelectionModel().select(-1);
         CB_Samochod.getSelectionModel().select(-1);
-        showRents();
     }
 
 
@@ -149,22 +197,80 @@ public class WypozyczeniaController implements Initializable {
     }
 
 
+    private void executeQuery(String query) {
+        Connection conn = DBConnect.getConnection();
+
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception var5) {
+            var5.printStackTrace();
+        }
+    }
 
 
-
-@FXML
-private void cbClienttemp(ActionEvent e){
-
-}
-
-
-
+//@FXML
+//    private void InsertHandle(MouseEvent e) {
+//    System.out.println(cbKlient.getSelectionModel().getSelectedItem().getId_klienta());
+//    // int idkl = cbkl.getValue().getId_klienta();
+//
+////        int idsam = CB_Samochod.getSelectionModel().getSelectedItem().getId();
+////        String markaSam = CB_Samochod.getSelectionModel().getSelectedItem().getMarka();
+////        String ModelSam = CB_Samochod.getSelectionModel().getSelectedItem().getModel();
+////        String RejSam = CB_Samochod.getSelectionModel().getSelectedItem().getNrRej();
+//        LocalDate datWyp = dpWyp.getValue();
+//        LocalDate datZwr = dpZwr.getValue();
+//        try {
+//
+//
+//               // String query = "INSERT INTO wypozyczenia (id_klienta, id_sam, Marka, Model, nrRej, DataWyp, DataZwr ) VALUES (" + idkl + "," + idsam + ",'" + markaSam + "', '" + ModelSam + "','" + RejSam + "', "+datWyp + ", "+ datZwr+")";
+//              //  this.executeQuery(query);
+//              //  this.showRents();
+//                clearTextFields(null);
+//               }
+//        catch (Exception errr){
+//
+//        }
     @FXML
-    private void InsertHandle() {
-        System.out.println(CB_Klient.getValue());
-        System.out.println(CB_Samochod.getValue());
+    private void test1() {
+        try {
+            kltemp = cbKlient.getValue();
+        } catch (Exception ignored) {
+            ;
+        }
+
+    }
+    @FXML
+    private void test2() {
+        try {
+            samtemp = CB_Samochod.getValue();
+        } catch (Exception ignored) {
+            ;
+        }
 
     }
 
 
-}
+    @FXML
+    private void InsertHandle() {   // Elegancka funkcja, bardzo prosta do zaimplementowania. Wszystko działa.
+        Date datWyp = Date.valueOf(dpWyp.getValue());
+        Date datZwr = Date.valueOf(dpZwr.getValue());
+        try {
+                String query = "INSERT INTO wypozyczenia (id_klienta, id_sam, Marka, Model, nrRej, DataWyp, DataZwr ) VALUES (" + kltemp.getId_klienta() + "," + samtemp.getId() + ",'" + samtemp.getMarka() + "', '" + samtemp.getModel() + "','" + samtemp.getNrRej() + "', '"+datWyp+"' , '"+datZwr+"')";
+                this.executeQuery(query);
+                this.showRents();
+                clearTextFields(null);
+               }
+        catch (Exception ignored){
+
+        }
+
+    }
+
+
+
+    }
+
+
+
+

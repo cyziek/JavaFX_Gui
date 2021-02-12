@@ -1,13 +1,13 @@
 package Samochody;
 
-public class Samochody {
+public class samochody {
     private int id;
     private String marka;
     private String model;
     private String nrRej;
     private String stan;
 
-    public Samochody(int id, String marka, String model, String nrRej, String stan) {
+    public samochody(int id, String marka, String model, String nrRej, String stan) {
         this.id = id;
         this.marka = marka;
         this.model = model;

@@ -40,17 +40,17 @@ public class SamochodyController implements Initializable {
     private ComboBox<String> cbSTan;
 
     @FXML
-    private TableView<Samochody> table_cars;
+    private TableView<samochody> table_cars;
     @FXML
-    private TableColumn<Samochody, Integer> colId;
+    private TableColumn<samochody, Integer> colId;
     @FXML
-    private TableColumn<Samochody, String> colMarka;
+    private TableColumn<samochody, String> colMarka;
     @FXML
-    private TableColumn<Samochody, String> colModel;
+    private TableColumn<samochody, String> colModel;
     @FXML
-    private TableColumn<Samochody, String> colNrRej;
+    private TableColumn<samochody, String> colNrRej;
     @FXML
-    private TableColumn<Samochody, String> colStan;
+    private TableColumn<samochody, String> colStan;
     @FXML
     private ImageView btnInsert;
     @FXML
@@ -88,8 +88,8 @@ public class SamochodyController implements Initializable {
 
 
 
-    public static ObservableList<Samochody> getCarsList() {
-        ObservableList<Samochody> samochodyList = FXCollections.observableArrayList();
+    public static ObservableList<samochody> getCarsList() {
+        ObservableList<samochody> samochodyList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM samochody";
 
@@ -98,7 +98,7 @@ public class SamochodyController implements Initializable {
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
-                Samochody sam = new Samochody(rs.getInt("id"), rs.getString("marka"), rs.getString("model"), rs.getString("nrRej"), rs.getString("stan"));
+                samochody sam = new samochody(rs.getInt("id"), rs.getString("marka"), rs.getString("model"), rs.getString("nrRej"), rs.getString("stan"));
                 samochodyList.add(sam);
             }
         } catch (Exception e) {
@@ -112,7 +112,7 @@ public class SamochodyController implements Initializable {
 
 
     public void showCars() {
-        ObservableList<Samochody> list = this.getCarsList();
+        ObservableList<samochody> list = this.getCarsList();
         this.colId.setCellValueFactory(new PropertyValueFactory("id"));
         this.colMarka.setCellValueFactory(new PropertyValueFactory("marka"));
         this.colModel.setCellValueFactory(new PropertyValueFactory("model"));
@@ -170,7 +170,7 @@ public class SamochodyController implements Initializable {
     @FXML
     public void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
         try {
-            Samochody sam = table_cars.getSelectionModel().getSelectedItem();
+            samochody sam = table_cars.getSelectionModel().getSelectedItem();
             tfId.setText("" + sam.getId());
             tfMarka.setText("" + sam.getMarka());
             tfModel.setText("" + sam.getModel());
@@ -229,7 +229,7 @@ public class SamochodyController implements Initializable {
     @FXML
     private void searchRecord(KeyEvent ke){
 
-        FilteredList<Samochody> samochodyFilteredList = new FilteredList<>(getCarsList(), p-> true );
+        FilteredList<samochody> samochodyFilteredList = new FilteredList<>(getCarsList(), p-> true );
         searchBox.textProperty().addListener((observableValue, oldvalue, newvalue) -> {
             samochodyFilteredList.setPredicate(pers -> {
 
@@ -256,7 +256,7 @@ public class SamochodyController implements Initializable {
 
                 return false;
             });
-            SortedList<Samochody> sortedList = new SortedList<>(samochodyFilteredList);
+            SortedList<samochody> sortedList = new SortedList<>(samochodyFilteredList);
             sortedList.comparatorProperty().bind(table_cars.comparatorProperty());
             table_cars.setItems(sortedList);
         });

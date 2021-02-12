@@ -3,7 +3,7 @@ package Wypozyczenia;
 
 import java.util.Date;
 
-public class Wypozyczenia {
+public class wypozyczenia {
     private int id_wyp;
     private String imie_klienta;
     private String nazwisko_klienta;
@@ -13,7 +13,7 @@ public class Wypozyczenia {
     private Date data_wyp;
     private Date data_zwr;
 
-    public Wypozyczenia(int id_wyp, String imie_klienta, String nazwisko_klienta, String marka_sam, String model_sam, String nrRej_sam, Date data_wyp, Date data_zwr) {
+    public wypozyczenia(int id_wyp, String imie_klienta, String nazwisko_klienta, String marka_sam, String model_sam, String nrRej_sam, Date data_wyp, Date data_zwr) {
         this.id_wyp = id_wyp;
         this.imie_klienta = imie_klienta;
         this.nazwisko_klienta = nazwisko_klienta;

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #374a36;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Klienci.KlienciController">
+   <children>
+      <AnchorPane prefHeight="543.0" prefWidth="228.0" style="-fx-background-color: #0d261a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="550.0" prefWidth="228.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="199.0" text="           Klienci" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfImie" prefHeight="30.0" prefWidth="180.0" promptText="Imie">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="tfNazwisko" prefHeight="30.0" prefWidth="180.0" promptText="Nazwisko">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="tfAdres" prefHeight="30.0" prefWidth="180.0" promptText="Adres">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="tfNIP" prefHeight="30.0" prefWidth="180.0" promptText="NIP" />
+                  <TextField fx:id="tfTel" prefHeight="30.0" prefWidth="180.0" promptText="Numer telefonu" />
+                  <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFields" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/clear.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="125.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <TextField fx:id="tfId" editable="false" focusTraversable="false" prefHeight="0.0" prefWidth="188.0" visible="false" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </padding>
+            </VBox>
+            <ImageView fx:id="btnInsert" fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="467.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/plus.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnUpdate" fitHeight="53.0" fitWidth="53.0" layoutX="88.0" layoutY="467.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/update.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnDelete" fitHeight="53.0" fitWidth="56.0" layoutX="151.0" layoutY="467.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/delete.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="table_clients" layoutX="228.0" layoutY="142.0" onMouseClicked="#handleMouseAction" prefHeight="508.0" prefWidth="672.0" style="-fx-background-color: #e5ffe6;">
+         <columns>
+            <TableColumn fx:id="colIdKlienta" prefWidth="65.0" text="ID Klienta" visible="false" />
+            <TableColumn fx:id="colImie" prefWidth="75.0" text="Imię" />
+            <TableColumn fx:id="colNazwisko" prefWidth="125.0" text="Nazwisko" />
+            <TableColumn fx:id="colAdres" prefWidth="167.0" text="Adres" />
+            <TableColumn fx:id="colNIP" prefWidth="113.0" text="NIP" />
+            <TableColumn fx:id="colTel" prefWidth="125.0" text="tel" />
+         </columns>
+      </TableView>
+      <TextField fx:id="searchBox" layoutX="252.0" layoutY="101.0" onKeyTyped="#searchRecord" promptText="Wyszukaj..." />
+      <ImageView fx:id="btnFromClientsToCars" fitHeight="76.0" fitWidth="70.0" layoutX="415.0" layoutY="8.0" onMouseClicked="#fromClientsToCars" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/car.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="btnGoToRent" fitHeight="70.0" fitWidth="85.0" layoutX="571.0" layoutY="10.0" onMouseClicked="#fromClientsToRent" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/rents.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="419.0" layoutY="85.0" text="Samochody" textFill="WHITE" />
+      <Label layoutX="565.0" layoutY="85.0" text="Wypożyczenia" textFill="WHITE" />
+   </children>
+</AnchorPane>
