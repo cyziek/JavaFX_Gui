@@ -24,8 +24,8 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbKlient" editable="true" onMouseClicked="#cbClientHandle" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
-                  <ComboBox fx:id="CB_Samochod" editable="true" onMouseClicked="#cbCarHandle" prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
+                  <ComboBox fx:id="CB_Klient" editable="true" onAction="#cbClienttemp" prefHeight="33.0" prefWidth="188.0" promptText="Klient" />
+                  <ComboBox fx:id="CB_Samochod" editable="true"  prefHeight="33.0" prefWidth="188.0" promptText="Samochod" />
                   <DatePicker fx:id="dpWyp" editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data wypożyczenia" />
                   <DatePicker fx:id="dpZwr" editable="false" prefHeight="30.0" prefWidth="200.0" promptText="Data zwrotu" />
                   <ImageView fx:id="btnClear" fitHeight="53.0" fitWidth="53.0" onMouseClicked="#clearTextFieldss" pickOnBounds="true" preserveRatio="true">

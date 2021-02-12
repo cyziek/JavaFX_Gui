@@ -3,17 +3,14 @@ package Samochody;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import DatabaseConn.DBConnect;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,17 +40,17 @@ public class SamochodyController implements Initializable {
     private ComboBox<String> cbSTan;
 
     @FXML
-    private TableView<samochody> table_cars;
+    private TableView<Samochody> table_cars;
     @FXML
-    private TableColumn<samochody, Integer> colId;
+    private TableColumn<Samochody, Integer> colId;
     @FXML
-    private TableColumn<samochody, String> colMarka;
+    private TableColumn<Samochody, String> colMarka;
     @FXML
-    private TableColumn<samochody, String> colModel;
+    private TableColumn<Samochody, String> colModel;
     @FXML
-    private TableColumn<samochody, String> colNrRej;
+    private TableColumn<Samochody, String> colNrRej;
     @FXML
-    private TableColumn<samochody, String> colStan;
+    private TableColumn<Samochody, String> colStan;
     @FXML
     private ImageView btnInsert;
     @FXML
@@ -91,8 +88,8 @@ public class SamochodyController implements Initializable {
 
 
 
-    public static ObservableList<samochody> getCarsList() {
-        ObservableList<samochody> samochodyList = FXCollections.observableArrayList();
+    public static ObservableList<Samochody> getCarsList() {
+        ObservableList<Samochody> samochodyList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM samochody";
 
@@ -101,7 +98,7 @@ public class SamochodyController implements Initializable {
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
-                samochody sam = new samochody(rs.getInt("id"), rs.getString("marka"), rs.getString("model"), rs.getString("nrRej"), rs.getString("stan"));
+                Samochody sam = new Samochody(rs.getInt("id"), rs.getString("marka"), rs.getString("model"), rs.getString("nrRej"), rs.getString("stan"));
                 samochodyList.add(sam);
             }
         } catch (Exception e) {
@@ -115,7 +112,7 @@ public class SamochodyController implements Initializable {
 
 
     public void showCars() {
-        ObservableList<samochody> list = this.getCarsList();
+        ObservableList<Samochody> list = this.getCarsList();
         this.colId.setCellValueFactory(new PropertyValueFactory("id"));
         this.colMarka.setCellValueFactory(new PropertyValueFactory("marka"));
         this.colModel.setCellValueFactory(new PropertyValueFactory("model"));
@@ -173,7 +170,7 @@ public class SamochodyController implements Initializable {
     @FXML
     public void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
         try {
-            samochody sam = table_cars.getSelectionModel().getSelectedItem();
+            Samochody sam = table_cars.getSelectionModel().getSelectedItem();
             tfId.setText("" + sam.getId());
             tfMarka.setText("" + sam.getMarka());
             tfModel.setText("" + sam.getModel());
@@ -232,7 +229,7 @@ public class SamochodyController implements Initializable {
     @FXML
     private void searchRecord(KeyEvent ke){
 
-        FilteredList<samochody> samochodyFilteredList = new FilteredList<>(getCarsList(),p-> true );
+        FilteredList<Samochody> samochodyFilteredList = new FilteredList<>(getCarsList(), p-> true );
         searchBox.textProperty().addListener((observableValue, oldvalue, newvalue) -> {
             samochodyFilteredList.setPredicate(pers -> {
 
@@ -259,7 +256,7 @@ public class SamochodyController implements Initializable {
 
                 return false;
             });
-            SortedList<samochody> sortedList = new SortedList<>(samochodyFilteredList);
+            SortedList<Samochody> sortedList = new SortedList<>(samochodyFilteredList);
             sortedList.comparatorProperty().bind(table_cars.comparatorProperty());
             table_cars.setItems(sortedList);
         });

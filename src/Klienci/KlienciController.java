@@ -7,12 +7,10 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import DatabaseConn.DBConnect;
-import Samochody.samochody;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -70,25 +68,25 @@ public class KlienciController implements Initializable{
 
 
     @FXML
-    private TableView<klienci> table_clients;
+    private TableView<Klienci> table_clients;
 
     @FXML
-    private TableColumn<klienci, Integer> colIdKlienta;
+    private TableColumn<Klienci, Integer> colIdKlienta;
 
     @FXML
-    private TableColumn<klienci, String> colImie;
+    private TableColumn<Klienci, String> colImie;
 
     @FXML
-    private TableColumn<klienci, String> colNazwisko;
+    private TableColumn<Klienci, String> colNazwisko;
 
     @FXML
-    private TableColumn<klienci, String> colAdres;
+    private TableColumn<Klienci, String> colAdres;
 
     @FXML
-    private TableColumn<klienci, Integer> colNIP;
+    private TableColumn<Klienci, Integer> colNIP;
 
     @FXML
-    private TableColumn<klienci, String> colTel;
+    private TableColumn<Klienci, String> colTel;
 
 
     @FXML
@@ -108,8 +106,8 @@ public class KlienciController implements Initializable{
         DBConnect.getConnection();
     }
 
-    public static ObservableList<klienci> getClientsList() {
-        ObservableList<klienci> klienciList = FXCollections.observableArrayList();
+    public static ObservableList<Klienci> getClientsList() {
+        ObservableList<Klienci> klienciList = FXCollections.observableArrayList();
         Connection conn = DBConnect.getConnection();
         String query = "SELECT * FROM klienci";
 
@@ -118,7 +116,7 @@ public class KlienciController implements Initializable{
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
-                klienci kl = new klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getInt("NIP"), rs.getString("nr_tel"));
+                Klienci kl = new Klienci(rs.getInt("id_klienta"), rs.getString("Imie"), rs.getString("Nazwisko"), rs.getString("Adres"), rs.getInt("NIP"), rs.getString("nr_tel"));
                 klienciList.add(kl);
             }
         } catch (Exception var7) {
@@ -132,7 +130,7 @@ public class KlienciController implements Initializable{
 
 
     public void showClients() {
-        ObservableList<klienci> list = this.getClientsList();
+        ObservableList<Klienci> list = this.getClientsList();
         this.colIdKlienta.setCellValueFactory(new PropertyValueFactory("id_klienta"));
         this.colImie.setCellValueFactory(new PropertyValueFactory("imie_klienta"));
         this.colNazwisko.setCellValueFactory(new PropertyValueFactory("nazwisko_klienta"));
@@ -145,7 +143,7 @@ public class KlienciController implements Initializable{
     @FXML
     private void handleMouseAction(MouseEvent event){ //zaznaczanie w tabeli
         try {
-            klienci kl = table_clients.getSelectionModel().getSelectedItem();
+            Klienci kl = table_clients.getSelectionModel().getSelectedItem();
             tfId.setText("" + kl.getId_klienta());
             tfImie.setText("" + kl.getImie_klienta());
             tfNazwisko.setText("" + kl.getNazwisko_klienta());
@@ -242,7 +240,7 @@ public class KlienciController implements Initializable{
     @FXML
     private void searchRecord(KeyEvent ke){
 
-        FilteredList<klienci> klienciFilteredList = new FilteredList<>(getClientsList(), p-> true );
+        FilteredList<Klienci> klienciFilteredList = new FilteredList<>(getClientsList(), p-> true );
         searchBox.textProperty().addListener((observableValue, oldvalue, newvalue) -> {
             klienciFilteredList.setPredicate(pers -> {
 
@@ -273,7 +271,7 @@ public class KlienciController implements Initializable{
 
                 return false;
             });
-            SortedList<klienci> sortedList = new SortedList<>(klienciFilteredList);
+            SortedList<Klienci> sortedList = new SortedList<>(klienciFilteredList);
             sortedList.comparatorProperty().bind(table_clients.comparatorProperty());
             table_clients.setItems(sortedList);
         });

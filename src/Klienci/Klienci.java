@@ -1,6 +1,6 @@
 package Klienci;
 
-public class klienci {
+public class Klienci {
 
    private int id_klienta;
    private String imie_klienta;
@@ -9,7 +9,7 @@ public class klienci {
    private int NIP_klienta;
    private String nr_tel_klienta;
 
-    public klienci(int id_klienta, String imie_klienta, String nazwisko_klienta, String adres_klienta, int NIP_klienta, String nr_tel_klienta) {
+    public Klienci(int id_klienta, String imie_klienta, String nazwisko_klienta, String adres_klienta, int NIP_klienta, String nr_tel_klienta) {
         this.id_klienta = id_klienta;
         this.imie_klienta = imie_klienta;
         this.nazwisko_klienta = nazwisko_klienta;
