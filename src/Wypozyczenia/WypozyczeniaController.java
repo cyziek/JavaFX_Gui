@@ -1,6 +1,9 @@
 package Wypozyczenia;
 
 
+
+
+
 import DatabaseConn.DBConnect;
 import Klienci.KlienciController;
 import Klienci.klienci;
@@ -24,12 +27,10 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static Samochody.SamochodyController.getCarsList;
@@ -40,9 +41,9 @@ public class WypozyczeniaController implements Initializable {
         this.showRents();
         DBConnect.getConnection();
         CB_Samochod.setItems(SamochodyController.getCarsList());
-        // new AutoCompleteComboBoxListener<>(CB_Samochod);
+         new AutoCompleteComboBoxListener<>(CB_Samochod);
         cbKlient.setItems(KlienciController.getClientsList());
-        // new AutoCompleteComboBoxListener<>(cbKlient);
+         new AutoCompleteComboBoxListener<>(cbKlient);
     }
 
 
@@ -105,7 +106,9 @@ public class WypozyczeniaController implements Initializable {
 
     @FXML
     void clearTextFields(MouseEvent event) {
-        System.out.println("");
+
+        CB_Samochod.getSelectionModel().select(-1);
+        cbKlient.getSelectionModel().select(-1);
     }
 
     @FXML
@@ -159,13 +162,6 @@ public class WypozyczeniaController implements Initializable {
 
 
     @FXML
-    private void clearTextFieldss(MouseEvent event){ //przycisk od czyszczenia
-        cbKlient.getSelectionModel().select(-1);
-        CB_Samochod.getSelectionModel().select(-1);
-    }
-
-
-    @FXML
     private void btnRentPickClient(MouseEvent event) {
         try {
             Parent ClientsView = FXMLLoader.load(getClass().getResource("/Klienci/Klienci.fxml"));
@@ -207,6 +203,7 @@ public class WypozyczeniaController implements Initializable {
             var5.printStackTrace();
         }
     }
+
 
 
 //@FXML
@@ -255,21 +252,68 @@ public class WypozyczeniaController implements Initializable {
     private void InsertHandle() {   // Elegancka funkcja, bardzo prosta do zaimplementowania. Wszystko działa.
         Date datWyp = Date.valueOf(dpWyp.getValue());
         Date datZwr = Date.valueOf(dpZwr.getValue());
-        try {
-                String query = "INSERT INTO wypozyczenia (id_klienta, id_sam, Marka, Model, nrRej, DataWyp, DataZwr ) VALUES (" + kltemp.getId_klienta() + "," + samtemp.getId() + ",'" + samtemp.getMarka() + "', '" + samtemp.getModel() + "','" + samtemp.getNrRej() + "', '"+datWyp+"' , '"+datZwr+"')";
+        if(datZwr.after(datWyp)) {
+            try {
+
+                String query = "INSERT INTO wypozyczenia (id_klienta, id_sam, Marka, Model, nrRej, DataWyp, DataZwr ) VALUES (" + kltemp.getId_klienta() + "," + samtemp.getId() + ",'" + samtemp.getMarka() + "', '" + samtemp.getModel() + "','" + samtemp.getNrRej() + "', '" + datWyp + "' , '" + datZwr + "')";
                 this.executeQuery(query);
                 this.showRents();
                 clearTextFields(null);
-               }
-        catch (Exception ignored){
+            } catch (Exception ignored) {
 
+            }
+        } else alert("Błąd! Data zwrotu nie może być przed datą wypożyczenia!");
+        dpZwr.setValue(null);
+    }
+
+    public void alert(String tekst){  //alert box
+
+        Alert alert = new Alert(Alert.AlertType.WARNING,"", ButtonType.YES, ButtonType.NO);  //new alert object
+        alert.setTitle("Warning!");  //warning box title
+        alert.setHeaderText("Błąd!");// Header
+        alert.setContentText(tekst + " Kontynuować?"); //Discription of warning
+        alert.getDialogPane().setPrefSize(300, 200); //sets size of alert box
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES){
+            System.out.println(" ");
+        } else {
+            System.out.println("");
         }
 
     }
 
 
+    @FXML
+    private void DeleteHandle(){
+        String query = "DELETE FROM wypozyczenia WHERE id_wyp =" + getTempSelected() + "";
+        this.executeQuery(query);
+        this.showRents();
+        clearTextFields(null);
 
     }
+private static int tempSelectedId_wyp;
+    public int getTempSelected(){
+
+        return tempSelectedId_wyp;
+    }
+    public void setTempSelected(int id){
+        tempSelectedId_wyp=id;
+    }
+
+    @FXML
+    private void tableMouseClick(){ //zaznaczanie w tabeli
+        try {
+            wypozyczenia wyp = table_wypozyczenia.getSelectionModel().getSelectedItem();
+            setTempSelected(wyp.getId_wyp());
+        }
+        catch (Exception e) {
+        }
+    }
+
+
+
+}
 
 
 

@@ -1,10 +1,10 @@
 package Klienci;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
 
 import DatabaseConn.DBConnect;
 import javafx.collections.FXCollections;
@@ -167,11 +167,42 @@ public class KlienciController implements Initializable{
     }
 
     private void insertRecord() {
-        String query = "INSERT INTO klienci (Imie, Nazwisko, Adres, NIP, nr_tel) VALUES ('" +  this.tfImie.getText() + "','" + this.tfNazwisko.getText() + "','" + this.tfAdres.getText() + "', " + this.tfNIP.getText() + ", '" + this.tfTel.getText() + "')";
-        this.executeQuery(query);
-        this.showClients();
-        clearTextFields(null);
+
+        if(!((tfImie.getText().isEmpty())||(tfNazwisko.getText().isEmpty())||(tfAdres.getText().isEmpty())||(tfNIP.getText().isEmpty())||(tfTel.getText().isEmpty()))) {
+            try {
+                Integer.parseInt(tfNIP.getText());
+            } catch(Exception e) {
+                System.err.println("Pole NIP zawiera nieprawidłowy znak!");
+                alert("Pole NIP zawiera nieprawidłowy znak!");
+                tfNIP.clear();
+                return;
+            }
+            String query = "INSERT INTO klienci (Imie, Nazwisko, Adres, NIP, nr_tel) VALUES ('" + this.tfImie.getText() + "','" + this.tfNazwisko.getText() + "','" + this.tfAdres.getText() + "', " + this.tfNIP.getText() + ", '" + this.tfTel.getText() + "')";
+               this.executeQuery(query);
+                alert("Błąd przy dodawaniu do bazy.");
+               System.err.println("Błąd przy dodawaniu do bazy.");
+            this.showClients();
+            clearTextFields(null);
+        } else alert("Wprowadzono złą lub pustą wartość.");
     }
+
+    public void alert(String tekst){  //alert box
+
+        Alert alert = new Alert(Alert.AlertType.WARNING,"", ButtonType.YES, ButtonType.NO);  //new alert object
+        alert.setTitle("Warning!");  //warning box title
+        alert.setHeaderText("Błąd!");// Header
+        alert.setContentText(tekst + " Kontynuować?"); //Discription of warning
+        alert.getDialogPane().setPrefSize(300, 200); //sets size of alert box
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES){
+            System.out.println(" ");
+        } else {
+            System.out.println("");
+        }
+
+    }
+
 
     private void updateRecord() {
         String query = "UPDATE  klienci SET Imie  = '" + this.tfImie.getText() + "', Nazwisko = '" + this.tfNazwisko.getText() + "', Adres = '" + this.tfAdres.getText() + "', NIP = '" + this.tfNIP.getText() + "', nr_tel = '"+ this.tfTel.getText() + "' WHERE id_klienta = " + this.tfId.getText() + "";

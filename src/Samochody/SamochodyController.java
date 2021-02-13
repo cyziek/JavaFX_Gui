@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import DatabaseConn.DBConnect;
@@ -128,17 +129,33 @@ public class SamochodyController implements Initializable {
 
     private void insertRecord() {
         try {
-            if(!((tfMarka.getText().isEmpty())&&(tfModel.getText().isEmpty())&&(tfNrRej.getText().isEmpty()))) {
+            if(!((tfMarka.getText().isEmpty())||(tfModel.getText().isEmpty())||(tfNrRej.getText().isEmpty())||(cbSTan.getSelectionModel().getSelectedIndex()==-1))) {
                 String query = "INSERT INTO samochody (marka, model, nrRej, stan) VALUES ('" + this.tfMarka.getText() + "','" + this.tfModel.getText() + "','" + this.tfNrRej.getText() + "', '" + this.cbSTan.getValue() + "')";
                 this.executeQuery(query);
                 this.showCars();
                 clearTextFields(null);
             }
-            else System.err.println("Pola nie mogą być puste!");
+            else alert("Pola nie mogą być puste!");
         }
         catch (Exception e){
 
         }
+    }
+    public void alert(String tekst){  //alert box
+
+        Alert alert = new Alert(Alert.AlertType.WARNING,"", ButtonType.YES, ButtonType.NO);  //new alert object
+        alert.setTitle("Warning!");  //warning box title
+        alert.setHeaderText("Błąd!");// Header
+        alert.setContentText(tekst + " Kontynuować?"); //Discription of warning
+        alert.getDialogPane().setPrefSize(300, 200); //sets size of alert box
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES){
+            System.out.println(" ");
+        } else {
+            System.out.println("");
+        }
+
     }
 
     private void updateRecord() {
